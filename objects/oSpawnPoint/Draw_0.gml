@@ -1,0 +1,1 @@
+// Draw step created so nothing is drawn during gameplay

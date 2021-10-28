@@ -1,0 +1,17 @@
+{
+  "option_gameguid": "ec16ebea-516e-4d61-b58c-f95d1b1c8f11",
+  "option_gameid": "0",
+  "option_game_speed": 60,
+  "option_mips_for_3d_textures": false,
+  "option_draw_colour": 4294967295,
+  "option_window_colour": 255,
+  "option_steam_app_id": "0",
+  "option_sci_usesci": true,
+  "option_author": "Dakota Oberon",
+  "option_lastchanged": "27 October 2021 23:42:51",
+  "option_spine_licence": false,
+  "resourceVersion": "1.2",
+  "name": "Main",
+  "tags": [],
+  "resourceType": "GMMainOptions",
+}
