@@ -31,6 +31,7 @@ function Array(val=[]) constructor {
 	push = ArrayPush;
 	reduce = ArrayReduce;
 	reduceRight = ArrayReduceRight;
+	remove = ArrayRemove;
 	reverse = ArrayReverse;
 	shift = ArrayShift;
 	slice = ArraySlice;
@@ -82,7 +83,7 @@ function ArrayConcat(newArray) {
 /**
 * Runs a function over each item in an Array and returns true if every item passes
 *
-* @function		ArrayConcat(function)
+* @function		ArrayRvery(function)
 * @param		{function}	func		Function to run for each element of Array
 * @return		{boolean}
 */
@@ -378,6 +379,20 @@ function ArrayReduceRight(func, initialValue=undefined) {
 	}
 
 	return currentValue;
+}
+
+/**
+* Remove a single value at the given index
+*
+* @function		ArrayRemove(index)
+* @param		{real}		index			Index of value to remove
+* @return		{self}
+* @see			array_delete
+*/
+function ArrayRemove(index) {
+	array_delete(self.value, index, 1);
+
+	return self;
 }
 
 /**

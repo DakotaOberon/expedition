@@ -167,14 +167,15 @@ function AnimationDraw(_x, _y, _id=noone) {
 /*
 * Process Animation frame step. Place inside of an objects draw function
 *
-* @function		AnimationFrameStep()
+* @function		AnimationFrameStep([speed])
+* @param		{real}		[speed]			Speed to play frame
 * @return		{self}
 * @see			Frame
 */
-function AnimationFrameStep() {
+function AnimationFrameStep(_speed=1) {
 	if (self.frameTimer > 0) {
 		// Each frame, decrease frame timer by one
-		self.frameTimer -= 1;
+		self.frameTimer -= _speed;
 	} else {
 		// If frameTimer is less than zero, move to next frame
 		self.currentFrame += 1;

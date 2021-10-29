@@ -7,6 +7,7 @@
 */
 function Player(_player) : Entity() constructor {
 	player = _player;
+	gamepad = -1;
 	controls = new Controls();
 	controlsInit = PlayerControlsInit;
 
@@ -22,31 +23,24 @@ function Player(_player) : Entity() constructor {
 * @function		PlayerControlsInit()
 * @return		{Controls}
 */
-function PlayerControlsInit() {
+function PlayerControlsInit(gamepadSlot=-1) {
 	// Set controls
 	// TODO: Should be moved into an ini file
-	switch (self.player) {
-		case 0:
-			self.controls
-				.add("moveLeft", ord("A"))
-				.add("moveRight", ord("D"))
-				.add("moveUp", ord("W"))
-				.add("moveDown", ord("S"));
-			break;
-		case 1:
-			self.controls
-				.add("moveLeft", vk_left)
-				.add("moveRight", vk_right)
-				.add("moveUp", vk_up)
-				.add("moveDown", vk_down);
-			break;
-		default:
-			self.controls
-				.add("moveLeft", ord("A"))
-				.add("moveRight", ord("D"))
-				.add("moveUp", ord("W"))
-				.add("moveDown", ord("S"));
-			break;
+	if (gamepadSlot >= 0) {
+		self.gamepad = gamepadSlot;
+		self.controls
+			.add("moveLeft", noone)
+			.add("moveRight", noone)
+			.add("moveUp", noone)
+			.add("moveDown", noone)
+			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
+	} else {
+		self.controls
+			.add("moveLeft", ord("A"))
+			.add("moveRight", ord("D"))
+			.add("moveUp", ord("W"))
+			.add("moveDown", ord("S"))
+			.add("backOut", vk_escape);
 	}
 
 	return self.controls
@@ -80,7 +74,10 @@ function PlayerUpdateDirection() {
 function PlayerUpdateMovement(_speed) {
 	self._xSpeed = 0;
 	self._ySpeed = 0;
-	if (self.checkAnyMoveKeys()) {
+	if (self.gamepad >= 0) {
+		self._xSpeed = (_speed * gamepad_axis_value(self.gamepad, gp_axislh));
+		self._ySpeed = (_speed * gamepad_axis_value(self.gamepad, gp_axislv));
+	} else if (self.checkAnyMoveKeys()) {
 		self._xSpeed = lengthdir_x(_speed, self._direction);
 		self._ySpeed = lengthdir_y(_speed, self._direction);
 	}

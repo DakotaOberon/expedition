@@ -1,14 +1,11 @@
 {
   "spriteId": {
-    "name": "sController",
-    "path": "sprites/sController/sController.yy",
+    "name": "sControllerIcon",
+    "path": "sprites/sControllerIcon/sControllerIcon.yy",
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": {
-    "name": "sController",
-    "path": "sprites/sController/sController.yy",
-  },
+  "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,
@@ -24,9 +21,10 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":2,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -35,7 +33,7 @@
     "path": "folders/Objects/Controllers.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oGameController",
+  "name": "oControllerController",
   "tags": [],
   "resourceType": "GMObject",
 }

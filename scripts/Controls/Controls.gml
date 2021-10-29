@@ -50,24 +50,6 @@ function ControlsChange(_name, _newKey, _type=KeyType.keyboard, _gamepad=noone) 
 	keyStruct.type = _type;
 	keyStruct.gamepad = _gamepad;
 
-// This logic should be moved outside
-	//if (keyboard_check(vk_anykey)) {
-	//	 keyStruct.type = KeyType.keyboard;
-	//	 keyStruct.gamepad = noone;
-	//} else if (mouse_check_button(mb_any)) {
-	//	keyStruct.type = KeyType.mouse;
-	//	keyStruct.gamepad = noone;
-	//} else {
-	//	var connectedGamepads = gamepad_get_device_count();
-	//	for (var i = 0; i < connectedGamepads; i++) {
-	//		var _buttonPressed = gamepad_check_any(i);
-	//		if (_buttonPressed) {
-	//			keyStruct.type = KeyType.gamepad;
-	//			keyStruct.gamepad = i;
-	//		}
-	//	}
-	//}
-
 	return self;
 }
 

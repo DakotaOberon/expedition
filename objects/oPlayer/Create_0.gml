@@ -1,10 +1,9 @@
-randomize();
 // Inherit the parent event
 event_inherited();
 
 // Initiate player
-player = new Player(instance_number(oPlayer) - 1);log("Player", instance_number(oPlayer));
-player.controlsInit();
+index = instance_number(oPlayer) - 1;
+player = new Player(index);
 player.animationsInit();
 
 // Set color for testing
