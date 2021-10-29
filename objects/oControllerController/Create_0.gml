@@ -1,6 +1,7 @@
 // Init values
 global.playing = 0;
 global.controllers = new Array();
+global.keyboard = false;
 
 // Loop over each possible controller slot
 for(var i = 0; i < 12; i++) {

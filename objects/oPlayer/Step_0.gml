@@ -14,10 +14,12 @@ if (player.controls.checkPress("backOut")) {
 	var gpSlot = player.gamepad;
 	if (gpSlot >= 0) {
 		global.controllers.value[gpSlot].setPlaying(false);
+	} else {
+		global.keyboard = false;
 	}
 	global.playing -= 1;
 
-	// Destory this object
+	// Destroy this object
 	instance_destroy(self);
 }
 
