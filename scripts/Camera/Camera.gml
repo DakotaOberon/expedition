@@ -9,6 +9,7 @@ function CameraEngine() constructor {
 	update = CameraEngineUpdate;
 	remove = CameraEngineRemove;
 	reset = CameraEngineReset;
+	step = CameraEngineStep;
 }
 
 /**
@@ -149,6 +150,12 @@ function CameraEngineReset() {
 	return self;
 }
 
+function CameraEngineStep() {
+	for (var i = 0; i < self.cameras.getLength(); i++) {
+		self.cameras.value[i].step();
+	}
+}
+
 /**
 * Camera constructor
 *
@@ -161,6 +168,7 @@ function Camera(_number, _follow=noone) constructor {
 	view = _number;
 
 	init = CameraInit;
+	step = CameraStep;
 }
 
 /**
@@ -183,7 +191,7 @@ function CameraInit(_x, _y, width, height, wRatio = 16, hRatio = 9) {
 		20 * wRatio, // 320
 		20 * hRatio, // 240
 		0,
-		self.follow,
+		noone,
 		-1,
 		-1,
 		width,
@@ -199,4 +207,37 @@ function CameraInit(_x, _y, width, height, wRatio = 16, hRatio = 9) {
 	view_yport[self.view] = _y;
 	view_wport[self.view] = width;
 	view_hport[self.view] = height;
+
+	self.follow.camera = self;
+}
+
+/**
+* Camera position step
+*
+* @function		CameraStep([direction], [distance])
+* @param		{real}		[direction]		Direction to adjust camera (Not yet implemented)
+* @param		{real}		[distance]		Distance from player to move camera (Not yet implemented)
+* @see			camera_set_view_pos
+*/
+function CameraStep(_direction=-1, _distance=0) {
+	var _speed = 15;
+	var _w = camera_get_view_width(self.camera);
+	var _h = camera_get_view_height(self.camera);
+	var _x = camera_get_view_x(self.camera);
+	var _y = camera_get_view_y(self.camera);
+
+	// Get camera position if exactly on player
+	var xTo = self.follow.x - (_w / 2);
+	var yTo = self.follow.y - (_h / 2);
+
+	// Get difference between actual position and target position
+	var xDiff = _x - xTo;
+	var yDiff = _y - yTo;
+
+	// Get value between both positions based on _speed
+	var xFinal = (_x - (xDiff / _speed));
+	var yFinal = (_y - (yDiff / _speed));
+
+	// Set camera position
+	camera_set_view_pos(self.camera, xFinal, yFinal);
 }

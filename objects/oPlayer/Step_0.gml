@@ -37,3 +37,8 @@ var spd = point_distance(lastX, lastY, x, y);
 
 // Increment frame
 player.animations.value[$ currentAnim].frameStep(spd);
+
+// Camera Step
+if (camera) {
+	camera.step();
+}
