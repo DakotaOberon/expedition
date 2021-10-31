@@ -225,10 +225,13 @@ function CameraStep(_direction=-1, _distance=0) {
 	var _h = camera_get_view_height(self.camera);
 	var _x = camera_get_view_x(self.camera);
 	var _y = camera_get_view_y(self.camera);
+	var _offSet = clamp(60 * (_distance / 100), 0, 60);
+	var xAdd = lengthdir_x(_offSet, _direction);
+	var yAdd = lengthdir_y(_offSet, _direction);
 
 	// Get camera position if exactly on player
-	var xTo = self.follow.x - (_w / 2);
-	var yTo = self.follow.y - (_h / 2);
+	var xTo = self.follow.x - (_w / 2) + xAdd;
+	var yTo = self.follow.y - (_h / 2) + yAdd;
 
 	// Get difference between actual position and target position
 	var xDiff = _x - xTo;

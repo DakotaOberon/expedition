@@ -40,5 +40,18 @@ player.animations.value[$ currentAnim].frameStep(spd);
 
 // Camera Step
 if (camera) {
-	camera.step();
+	if (player.gamepad >= 0) {
+		// Get right thumbstick values
+		var _rh = gamepad_axis_value(player.gamepad, gp_axisrh);
+		var _rv =  gamepad_axis_value(player.gamepad, gp_axisrv);
+		// Set direction and distance
+		var _direction = point_direction(0, 0, _rh, _rv);
+		var _distance = point_distance(x, y, x + (_rh * 100), y  + (_rv * 100));
+		camera.step(_direction, _distance);
+	} else {
+		// Set direction and distance
+		var _mouseDirection = point_direction(x, y, mouse_x, mouse_y);
+		var _mouseDistance = point_distance(x, y, mouse_x, mouse_y);
+		camera.step(_mouseDirection, _mouseDistance);
+	}
 }
