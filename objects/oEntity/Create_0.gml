@@ -1,5 +1,7 @@
 // Set current animation to idle
+animations = global._EntityBaseAnimationTemplate;
 currentAnim = animSet.idle;
+
 
 // Set movespeed
 moveSpeed = 2;

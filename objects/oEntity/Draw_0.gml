@@ -1,2 +1,2 @@
 // Draw current animation
-global._EntityBaseAnimationTemplate.value[$ currentAnim].draw(x, y);
+animations.value[$ currentAnim].draw(x, y, id);

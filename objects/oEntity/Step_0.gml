@@ -29,6 +29,11 @@ if (y < 0 || y > room_height) {
 	y = _lastY;
 }
 
+var spd = point_distance(_lastX, _lastY, x, y);
+
+// Increment frame
+animations.value[$ currentAnim].frameStep(spd);
+
 // Catch current x and y for next frame
 _lastX = x;
 _lastY = y;
