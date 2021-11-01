@@ -148,8 +148,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "Controller",
+    "path": "folders/Sprites/Controller.yy",
   },
   "resourceVersion": "1.0",
   "name": "sControllerIcon",

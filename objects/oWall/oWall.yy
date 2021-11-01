@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sSpawnPoint",
-    "path": "sprites/sSpawnPoint/sSpawnPoint.yy",
+    "name": "sWall",
+    "path": "sprites/sWall/sWall.yy",
   },
   "solid": false,
   "visible": true,
@@ -30,7 +30,7 @@
     "path": "folders/Objects/Map.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oSpawnPoint",
+  "name": "oWall",
   "tags": [],
   "resourceType": "GMObject",
 }

@@ -23,9 +23,8 @@ if (player.controls.checkPress("backOut")) {
 	instance_destroy(self);
 }
 
-// Update player position
-x += player._xSpeed;
-y += player._ySpeed;
+xTo = x + player._xSpeed;
+yTo = y + player._ySpeed;
 
 // Inherit the parent event
 event_inherited();
