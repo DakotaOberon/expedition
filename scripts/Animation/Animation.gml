@@ -125,11 +125,10 @@ function AnimationSetEndType(_endType) {
 * @return		{self}
 * @see			Frame
 */
-function AnimationAddFrame(_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _color=c_white) {
-	
+function AnimationAddFrame(_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _rotation=0, _color=c_white) {
 	// Add frame to animation frame array
-	self.push(new Frame(_sprIndex, _subImg, _length, _xFlip, _xOffset, _yOffset, _color));
-	
+	self.push(new Frame(_sprIndex, _subImg, _length, _xFlip, _xOffset, _yOffset, _rotation, _color));
+
 	// If this is the first frame, set current frame timer to it's length
 	if(self.frameTimer = -1) {
 		self.frameTimer = _length;
@@ -155,7 +154,7 @@ function AnimationDraw(_x, _y, _id=noone) {
 	var flip = frame.xFlip? -1 : 1;
 
 	// Draw sprite to screen
-	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, flip, 1, 0, frame.color, 1);
+	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, flip, 1, frame.rotation, frame.color, 1);
 
 	// Run frame step logic
 	//log("Drawing for entity ", _id);
@@ -217,13 +216,14 @@ function AnimationFrameStep(_speed=1) {
 * @param		{color}		color			Color to draw the frame with
 * @see			AnimationDraw
 */
-function Frame(_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _color=c_white) constructor {
+function Frame(_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _rotation=0, _color=c_white) constructor {
 	spriteIndex = _sprIndex;
 	subImg = _subImg;
 	length = _length;
 	xFlip = _xFlip;
 	xOffset = _xOffset;
 	yOffset = _yOffset;
+	rotation = _rotation;
 	color = _color;
 }
 

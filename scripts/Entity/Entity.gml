@@ -1,23 +1,4 @@
 /**
-* Entity constructor
-*
-* @function		Entity()
-* @see			AnimationEngine
-*/
-function Entity() constructor {
-	_xSpeed = 0;
-	_ySpeed = 0;
-	_direction = 0;
-
-	_health = 0;
-	_speed = 0;
-
-	animations = new AnimationEngine();
-	animationsInit = EntityAnimationsInit;
-	animationCopy = EntityAnimationTemplateCopy;
-}
-
-/**
 * Initiate Animations for entity
 *
 * @function		EntityAnimationsInit()
@@ -25,7 +6,7 @@ function Entity() constructor {
 * @see			EntityAnimationTemplateCopy
 */
 function EntityAnimationsInit() {
-	self.animationCopy(global._EntityBaseAnimationTemplate);
+	self.animationsCopy(global._EntityBaseAnimationTemplate);
 	return self.animations;
 }
 

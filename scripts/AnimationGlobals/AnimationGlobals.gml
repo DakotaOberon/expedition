@@ -4,7 +4,11 @@ enum animSet {
 	walkL,
 	walkR,
 	walkU,
-	walkD
+	walkD,
+	rollL,
+	rollR,
+	rollU,
+	rollD
 }
 
 // Entity Base Animation

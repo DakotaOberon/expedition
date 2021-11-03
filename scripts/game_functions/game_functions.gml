@@ -4,13 +4,13 @@
 * @function		spawn_player()
 * @return		{real}
 */
-function spawn_player() {
+function spawn_player(class=oClassDefault) {
 	var player = noone;
 	if (instance_exists(oSpawnPoint)) {
 		// Find spawn point
 		var spNum = instance_number(oSpawnPoint);
 		var sp = instance_find(oSpawnPoint, irandom(spNum - 1));
-		player = instance_create_layer(sp.x, sp.y, "Instances", oPlayer)
+		player = instance_create_layer(sp.x, sp.y, "Instances", class)
 
 		// Destroy spawnpoint object
 		instance_destroy(sp);

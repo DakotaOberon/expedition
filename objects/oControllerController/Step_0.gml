@@ -14,10 +14,10 @@ if (global.playing < 8) {
 				global.playing += 1;
 
 				// Spawn a player object
-				var player = spawn_player();
+				var player = spawn_player(oClassDefault);
 
 				// Assign gamepad to player
-				player.player.controlsInit(i);
+				player.controlsInit(i);
 
 				// Update camera
 				global.camera.update(global.players);
@@ -29,11 +29,11 @@ if (global.playing < 8) {
 		if (mouse_check_button_pressed(mb_any) || keyboard_check_pressed(vk_anykey)) {
 			global.keyboard = true;
 			global.playing += 1;
-		
+
 			var player = spawn_player();
-		
-			player.player.controlsInit();
-		
+
+			player.controlsInit();
+
 			global.camera.update(global.players);
 		}
 	}

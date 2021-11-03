@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sEntityBase",
-    "path": "sprites/sEntityBase/sEntityBase.yy",
+    "name": "sWater",
+    "path": "sprites/sWater/sWater.yy",
   },
   "solid": false,
   "visible": true,
@@ -21,19 +21,16 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Entity",
-    "path": "folders/Objects/Entity.yy",
+    "name": "Map",
+    "path": "folders/Objects/Map.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oEntity",
+  "name": "oWater",
   "tags": [],
   "resourceType": "GMObject",
 }

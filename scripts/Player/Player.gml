@@ -1,23 +1,4 @@
 /**
-* Player constructor
-*
-* @function		Player(player)
-* @param		{real}		player			Identify which player slot it is for
-* @see			Controls
-*/
-function Player(_player) : Entity() constructor {
-	player = _player;
-	gamepad = -1;
-	controls = new Controls();
-	controlsInit = PlayerControlsInit;
-
-	checkAnyMoveKeys = PlayerCheckAnyMoveKeys;
-
-	updateDirection = PlayerUpdateDirection;
-	updateMovement = PlayerUpdateMovement;
-}
-
-/**
 * Initiate controls
 *
 * @function		PlayerControlsInit()
@@ -27,12 +8,13 @@ function PlayerControlsInit(gamepadSlot=-1) {
 	// Set controls
 	// TODO: Should be moved into an ini file
 	if (gamepadSlot >= 0) {
-		self.gamepad = gamepadSlot;
+		self.gamepadSlot = gamepadSlot;
 		self.controls
 			.add("moveLeft", noone)
 			.add("moveRight", noone)
 			.add("moveUp", noone)
 			.add("moveDown", noone)
+			.add("dash", gp_shoulderlb)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
 		self.controls
@@ -40,6 +22,7 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.add("moveRight", ord("D"))
 			.add("moveUp", ord("W"))
 			.add("moveDown", ord("S"))
+			.add("dash", ord("E"))
 			.add("backOut", vk_escape);
 	}
 
@@ -63,7 +46,6 @@ function PlayerUpdateDirection() {
 	return self;
 }
 
-
 /**
 * Update players direction value
 *
@@ -74,9 +56,9 @@ function PlayerUpdateDirection() {
 function PlayerUpdateMovement(_speed) {
 	self._xSpeed = 0;
 	self._ySpeed = 0;
-	if (self.gamepad >= 0) {
-		self._xSpeed = (_speed * gamepad_axis_value(self.gamepad, gp_axislh));
-		self._ySpeed = (_speed * gamepad_axis_value(self.gamepad, gp_axislv));
+	if (self.gamepadSlot >= 0) {
+		self._xSpeed = (_speed * gamepad_axis_value(self.gamepadSlot, gp_axislh));
+		self._ySpeed = (_speed * gamepad_axis_value(self.gamepadSlot, gp_axislv));
 	} else if (self.checkAnyMoveKeys()) {
 		self._xSpeed = lengthdir_x(_speed, self._direction);
 		self._ySpeed = lengthdir_y(_speed, self._direction);
