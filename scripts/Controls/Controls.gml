@@ -14,21 +14,23 @@ function Controls() constructor {
 * Add a Key to the Controls
 *
 * @function		ControlsAdd(name, key, [type], [gamepad])
-* @param		{any}		name		Name of struct accessor
-* @param		{key}		key			Button identifier
-* @param		{enum}		[type]		KeyType of control
-* @param		{real}		[gamepad]	Gamepad slot to assign controls too
+* @param		{any}		name			Name of struct accessor
+* @param		{key}		key				Button identifier
+* @param		{enum}		[type]			KeyType of control
+* @param		{real}		[gamepad]		Gamepad slot to assign controls too
+* @param		{real}		[axisDirection]	Direction of axis
 * @return		{self}
 * @see			KeyType
 */
-function ControlsAdd(_name, _key, _type=KeyType.keyboard, _gamepad=noone) {
+function ControlsAdd(_name, _key, _type=KeyType.keyboard, _gamepad=noone, _axisDirection=1) {
 	// Create array of forbidden names
 	var FORBIDDENNAMES = new Array(["add", "change", "check"]);
-	
+
 	// Check if name is a forbidden name
 	if (FORBIDDENNAMES.indexOf(_name) == noone) {
-		variable_struct_set(self, _name, new Key(_key, _type, _gamepad));
+		variable_struct_set(self, _name, new Key(_key, _type, _gamepad, _axisDirection));
 	}
+
 	delete FORBIDDENNAMES;
 
 	return self;
@@ -38,10 +40,10 @@ function ControlsAdd(_name, _key, _type=KeyType.keyboard, _gamepad=noone) {
 * Change a current control
 *
 * @function		ControlsChange(name, key, [type], [gamepad])
-* @param		{any}		name		Name of control to change
-* @param		{key}		key			Button identifier
-* @param		{enum}		[type]		KeyType of control
-* @param		{real}		[gamepad]	Gamepad slot to assign controls too
+* @param		{any}		name			Name of control to change
+* @param		{key}		key				Button identifier
+* @param		{enum}		[type]			KeyType of control
+* @param		{real}		[gamepad]		Gamepad slot to assign controls too
 * @return		{self}
 */
 function ControlsChange(_name, _newKey, _type=KeyType.keyboard, _gamepad=noone) {
@@ -57,7 +59,7 @@ function ControlsChange(_name, _newKey, _type=KeyType.keyboard, _gamepad=noone) 
 * Check if a control is being held
 *
 * @function		ControlsCheck(name)
-* @param		{any}		name		Name of control to check
+* @param		{any}		name			Name of control to check
 * @return		{boolean}
 */
 function ControlsCheck(_name) {
@@ -69,6 +71,8 @@ function ControlsCheck(_name) {
 			return mouse_check_button(_key.key);
 		case KeyType.gamepad:
 			return gamepad_button_check(_key.gamepad, _key.key);
+		case KeyType.gpAxis:
+			return gamepad_check_axis_strict(_key.gamepad, _key.key, _key.axisDirection);
 	}
 }
 
@@ -76,7 +80,7 @@ function ControlsCheck(_name) {
 * Check if a control has been pressed this frame
 *
 * @function		ControlsCheckPress(name)
-* @param		{any}		name		Name of control to check
+* @param		{any}		name			Name of control to check
 * @return		{boolean}
 */
 function ControlsCheckPress(_name) {
@@ -87,27 +91,32 @@ function ControlsCheckPress(_name) {
 		case KeyType.mouse:
 			return mouse_check_button_pressed(_key.key);
 		case KeyType.gamepad:
-			return gamepad_button_check_pressed(_key.gamepad, _key.key);
+			return gamepad_button_check_pressed(_key.gamepad, _key.key)
+		case KeyType.gpAxis:
+			return gamepad_check_axis_strict(_key.gamepad, _key.key, _key.axisDirection);
 	}
 }
 
 /**
 * Key constructor
 *
-* @function		Key(key, [type], [gamepad])
+* @function		Key(key, [type], [gamepad], [axisDirection])
 * @param		{real}		key				Button identifier
 * @param		{enum}		[type]			Type of button
 * @param		{real}		[gamepad]		Slot of gamepad
+* @param		{real}		[axisDirection]	Direction of axis
 * @return		{boolean}
 */
-function Key(_key, _type=KeyType.keyboard, _gamepad=noone) constructor {
+function Key(_key, _type=KeyType.keyboard, _gamepad=noone, _axisDirection=1) constructor {
 	key = _key;
 	type = _type;
 	gamepad = _gamepad;
+	axisDirection = _axisDirection;
 }
 
 enum KeyType {
 	mouse,
 	keyboard,
-	gamepad
+	gamepad,
+	gpAxis
 }

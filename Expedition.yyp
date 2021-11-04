@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"oSurface","path":"objects/oSurface/oSurface.yy",},"order":2,},
     {"id":{"name":"sDummy","path":"sprites/sDummy/sDummy.yy",},"order":0,},
     {"id":{"name":"Instance","path":"scripts/Instance/Instance.yy",},"order":3,},
     {"id":{"name":"Controls","path":"scripts/Controls/Controls.yy",},"order":0,},
@@ -26,9 +27,9 @@
     {"id":{"name":"Animation","path":"scripts/Animation/Animation.yy",},"order":0,},
     {"id":{"name":"sController","path":"sprites/sController/sController.yy",},"order":0,},
     {"id":{"name":"gamepad_functions","path":"scripts/gamepad_functions/gamepad_functions.yy",},"order":0,},
-    {"id":{"name":"oWater","path":"objects/oWater/oWater.yy",},"order":2,},
     {"id":{"name":"oDummy","path":"objects/oDummy/oDummy.yy",},"order":2,},
     {"id":{"name":"sWall","path":"sprites/sWall/sWall.yy",},"order":1,},
+    {"id":{"name":"approach","path":"scripts/approach/approach.yy",},"order":4,},
     {"id":{"name":"Player","path":"scripts/Player/Player.yy",},"order":2,},
     {"id":{"name":"oEntity","path":"objects/oEntity/oEntity.yy",},"order":0,},
     {"id":{"name":"sSpawnPoint","path":"sprites/sSpawnPoint/sSpawnPoint.yy",},"order":0,},

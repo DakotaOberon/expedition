@@ -1,6 +1,6 @@
-// Run step scripts from Player
+// Run step scripts
 updateDirection();
-updateMovement(moveSpeed);
+updateMovement();
 
 // Check for backOut button being pressed
 if (controls.checkPress("backOut")) {

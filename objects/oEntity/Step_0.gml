@@ -29,6 +29,7 @@ if (y < 0 || y > room_height) {
 	y = _lastY;
 }
 
+// Get current speed
 var spd = point_distance(_lastX, _lastY, x, y);
 
 // Increment frame
