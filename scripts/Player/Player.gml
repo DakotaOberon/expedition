@@ -12,8 +12,8 @@ function PlayerControlsInit(gamepadSlot=-1) {
 		self.controls
 			.add("moveLeft", gp_axislh, KeyType.gpAxis, gamepadSlot, -1)
 			.add("moveRight", gp_axislh, KeyType.gpAxis, gamepadSlot, 1)
-			.add("moveUp", gp_axislv, KeyType.gpAxis, gamepadSlot, 1)
-			.add("moveDown", gp_axislh, KeyType.gpAxis, gamepadSlot, -1)
+			.add("moveUp", gp_axislv, KeyType.gpAxis, gamepadSlot, -1)
+			.add("moveDown", gp_axislv, KeyType.gpAxis, gamepadSlot, 1)
 			.add("dash", gp_shoulderlb, KeyType.gamepad, gamepadSlot)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
@@ -36,12 +36,14 @@ function PlayerControlsInit(gamepadSlot=-1) {
 * @return		{self}
 */
 function PlayerUpdateDirection() {
-	var lk = self.controls.check("moveLeft")
-	var rk = self.controls.check("moveRight")
-	var uk = self.controls.check("moveUp")
-	var dk = self.controls.check("moveDown")
+	var lk = self.controls.check("moveLeft");
+	var rk = self.controls.check("moveRight");
+	var uk = self.controls.check("moveUp");
+	var dk = self.controls.check("moveDown");
 
+	log("lk:", lk, "rk:", rk, "uk:", uk, "dk:", dk);
 	self._direction = point_direction(0, 0, rk - lk, dk - uk);
+	log("Direction:", self._direction);
 
 	return self;
 }

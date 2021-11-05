@@ -47,7 +47,16 @@ function gamepad_check_axis_strict(_slot=0, _axis=gp_axislh, _direction=1) {
 	var axisVal = gamepad_axis_value(_slot, _axis);
 
 	// Check if axis is going the correct direction
+	// _direction 1 || -1
+	// axisVal -1 to 1
 	var check = abs(_direction - axisVal);
-	
-	return (check >= 0) && (check < 1);
+
+	// 0 - 1 // Opposite results in check being > 1
+	if ((check >= 0) && (check < 1)) {
+		//log("Abs Axis:", abs(axisVal), "| axis:", _axis, "| direction:", _direction);
+		return abs(axisVal);
+	}
+
+	//log("Abs Axis:", 0);
+	return 0;
 }
