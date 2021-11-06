@@ -6,22 +6,29 @@
 */
 function PlayerControlsInit(gamepadSlot=-1) {
 	// Set controls
-	// TODO: Should be moved into an ini file
 	if (gamepadSlot >= 0) {
 		self.gamepadSlot = gamepadSlot;
 		self.controls
 			.add("moveLeft", gp_axislh, KeyType.gpAxis, gamepadSlot, -1)
+			.addAlt("moveLeft", gp_padl, KeyType.gamepad, gamepadSlot)
 			.add("moveRight", gp_axislh, KeyType.gpAxis, gamepadSlot, 1)
+			.addAlt("movRight", gp_padr, KeyType.gamepad, gamepadSlot)
 			.add("moveUp", gp_axislv, KeyType.gpAxis, gamepadSlot, -1)
+			.addAlt("moveUp", gp_padu, KeyType.gamepad, gamepadSlot)
 			.add("moveDown", gp_axislv, KeyType.gpAxis, gamepadSlot, 1)
+			.addAlt("moveDown", gp_padd, KeyType.gamepad, gamepadSlot)
 			.add("dash", gp_shoulderlb, KeyType.gamepad, gamepadSlot)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
 		self.controls
 			.add("moveLeft", ord("A"))
+			.addAlt("moveLeft", vk_left)
 			.add("moveRight", ord("D"))
+			.addAlt("moveRight", vk_right)
 			.add("moveUp", ord("W"))
+			.addAlt("moveUp", vk_up)
 			.add("moveDown", ord("S"))
+			.addAlt("moveDown", vk_down)
 			.add("dash", ord("E"))
 			.add("backOut", vk_escape);
 	}
@@ -41,9 +48,7 @@ function PlayerUpdateDirection() {
 	var uk = self.controls.check("moveUp");
 	var dk = self.controls.check("moveDown");
 
-	log("lk:", lk, "rk:", rk, "uk:", uk, "dk:", dk);
 	self._direction = point_direction(0, 0, rk - lk, dk - uk);
-	log("Direction:", self._direction);
 
 	return self;
 }

@@ -4,7 +4,10 @@
 * @function		Controls()
 */
 function Controls() constructor {
+	keys = {};
+	altKeys = {};
 	add = ControlsAdd;
+	addAlt = ControlsAddAlt;
 	change = ControlsChange;
 	check = ControlsCheck;
 	checkPress = ControlsCheckPress;
@@ -23,15 +26,25 @@ function Controls() constructor {
 * @see			KeyType
 */
 function ControlsAdd(_name, _key, _type=KeyType.keyboard, _gamepad=noone, _axisDirection=1) {
-	// Create array of forbidden names
-	var FORBIDDENNAMES = new Array(["add", "change", "check"]);
+	variable_struct_set(self.keys, _name, new Key(_key, _type, _gamepad, _axisDirection));
 
-	// Check if name is a forbidden name
-	if (FORBIDDENNAMES.indexOf(_name) == noone) {
-		variable_struct_set(self, _name, new Key(_key, _type, _gamepad, _axisDirection));
-	}
+	return self;
+}
 
-	delete FORBIDDENNAMES;
+/**
+* Add an Alternate Key to the Controls
+*
+* @function		ControlsAddAlt(name, key, [type], [gamepad])
+* @param		{any}		name			Name of struct accessor
+* @param		{key}		key				Button identifier
+* @param		{enum}		[type]			KeyType of control
+* @param		{real}		[gamepad]		Gamepad slot to assign controls too
+* @param		{real}		[axisDirection]	Direction of axis
+* @return		{self}
+* @see			KeyType
+*/
+function ControlsAddAlt(_name, _key, _type=KeyType.keyboard, _gamepad=noone, _axisDirection=1) {
+	variable_struct_set(self.altKeys, _name, new Key(_key, _type, _gamepad, _axisDirection));
 
 	return self;
 }
@@ -39,18 +52,24 @@ function ControlsAdd(_name, _key, _type=KeyType.keyboard, _gamepad=noone, _axisD
 /**
 * Change a current control
 *
-* @function		ControlsChange(name, key, [type], [gamepad])
+* @function		ControlsChange(name, key, [alt], [type], [gamepad])
 * @param		{any}		name			Name of control to change
 * @param		{key}		key				Button identifier
+* @param		{boolean}	alt				Is this an alternate
 * @param		{enum}		[type]			KeyType of control
 * @param		{real}		[gamepad]		Gamepad slot to assign controls too
 * @return		{self}
 */
-function ControlsChange(_name, _newKey, _type=KeyType.keyboard, _gamepad=noone) {
-	var keyStruct = self[$ _name];
+function ControlsChange(_name, _newKey, _alt=false, _type=noone, _gamepad=noone) {
+	if (_alt) {
+		var keyStruct = self.altKeys[$ _name];
+	} else {
+		var keyStruct = self.keys[$ _name];
+	}
+
 	keyStruct.key = _newKey;
-	keyStruct.type = _type;
-	keyStruct.gamepad = _gamepad;
+	keyStruct.type = _type? _type : keyStruct.type;
+	keyStruct.gamepad = _gamepad? _gamepad : keyStruct.gamepad;
 
 	return self;
 }
@@ -63,17 +82,44 @@ function ControlsChange(_name, _newKey, _type=KeyType.keyboard, _gamepad=noone) 
 * @return		{boolean}
 */
 function ControlsCheck(_name) {
-	var _key = self[$ _name];
+	// Set default return
+	var returnVal = 0;
+
+	// Get Primary key
+	var _key = self.keys[$ _name];
 	switch (_key.type) {
 		case KeyType.keyboard:
-			return keyboard_check(_key.key);
+			returnVal = keyboard_check(_key.key);
+		break;
 		case KeyType.mouse:
-			return mouse_check_button(_key.key);
+			returnVal = mouse_check_button(_key.key);
+		break;
 		case KeyType.gamepad:
-			return gamepad_button_check(_key.gamepad, _key.key);
+			returnVal = gamepad_button_check(_key.gamepad, _key.key);
+		break;
 		case KeyType.gpAxis:
-			return gamepad_check_axis_strict(_key.gamepad, _key.key, _key.axisDirection);
+			returnVal = gamepad_check_axis_strict(_key.gamepad, _key.key, _key.axisDirection);
+		break;
 	}
+
+	if (returnVal == 0) {
+		if (variable_struct_exists(self.altKeys, _name)) {
+			// Get Alternate key
+			var _altKey = self.altKeys[$ _name];
+			switch (_altKey.type) {
+				case KeyType.keyboard:
+					return keyboard_check(_altKey.key);
+				case KeyType.mouse:
+					return mouse_check_button(_altKey.key);
+				case KeyType.gamepad:
+					return gamepad_button_check(_altKey.gamepad, _altKey.key);
+				case KeyType.gpAxis:
+					return gamepad_check_axis_strict(_altKey.gamepad, _altKey.key, _altKey.axisDirection);
+			}
+		}
+	}
+
+	return returnVal;
 }
 
 /**
@@ -84,7 +130,7 @@ function ControlsCheck(_name) {
 * @return		{boolean}
 */
 function ControlsCheckPress(_name) {
-	var _key = self[$ _name];
+	var _key = self.keys[$ _name];
 	switch (_key.type) {
 		case KeyType.keyboard:
 			return keyboard_check_pressed(_key.key);
@@ -94,6 +140,20 @@ function ControlsCheckPress(_name) {
 			return gamepad_button_check_pressed(_key.gamepad, _key.key)
 		case KeyType.gpAxis:
 			return gamepad_check_axis_strict(_key.gamepad, _key.key, _key.axisDirection);
+	}
+	
+	if (variable_struct_exists(self.altKeys, _name)) {
+		var _altKey = self.altKeys[$ _name];
+		switch (_altKey.type) {
+			case KeyType.keyboard:
+				return keyboard_check_pressed(_altKey.key);
+			case KeyType.mouse:
+				return mouse_check_button_pressed(_altKey.key);
+			case KeyType.gamepad:
+				return gamepad_button_check_pressed(_altKey.gamepad, _altKey.key);
+			case KeyType.gpAxis:
+				return gamepad_check_axis_strict(_altKey.gamepad, _altKey.key, _altKey.axisDirection);
+		}
 	}
 }
 
