@@ -19,9 +19,12 @@ sprint = {
 	_speed: (self.moveSpeed * 1.5)
 }
 
+// Passive
 passive = {
 	timer: 0,
-	length: 30,
+	length: 300,
 	cooldown: 300,
 	cooldownTimer: 0
 }
+
+_health = 100;

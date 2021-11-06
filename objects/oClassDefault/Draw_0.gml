@@ -23,5 +23,3 @@ if (dash.timer > 0) {
 	}
 	draw_set_alpha(1);
 }
-
-draw_text(x, y, invincibleTimer);

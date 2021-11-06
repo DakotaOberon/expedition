@@ -26,3 +26,20 @@ y = yTo;
 if (invincibleTimer > 0) {
 	invincibleTimer -= 1;
 }
+
+// Check for damage taken
+if (tookDamage) {
+	var dn = instance_create_layer(x, y, "Hitbox", oDamageNumber)
+	dn.damage = damageTook;
+	dn.crit = false;
+
+	tookDamage = false;
+}
+
+// Reset combat values
+damageTook = 0;
+
+// Death
+if (_health <= 0) {
+	instance_destroy();
+}

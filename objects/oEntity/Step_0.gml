@@ -37,4 +37,3 @@ animations.value[$ currentAnim].frameStep(spd);
 
 // Set depth
 depth = -y;
-

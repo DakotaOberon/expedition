@@ -212,7 +212,7 @@ function ArrayForEach(func) {
 */
 function ArrayIncludes(val) {
 	// Check if value exists
-	if (self.indexOf(val)) {
+	if (self.indexOf(val) >= 0) {
 		return true;
 	}
 	return false;

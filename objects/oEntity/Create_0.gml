@@ -21,8 +21,11 @@ moveSpeed = 2;
 _direction = 0;
 
 // Combat values
-_health = 0;
+_health = 11;
 invincibleTimer = 0;
+tookDamage = false;
+damageTook = 0;
+allyTag = "passive";
 
 animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;

@@ -13,3 +13,5 @@ updateDirection = PlayerUpdateDirection;
 updateMovement = PlayerUpdateMovement;
 
 camera = noone;
+
+allyTag = "friendly";

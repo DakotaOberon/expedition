@@ -4,23 +4,7 @@ updateMovement();
 
 // Check for backOut button being pressed
 if (controls.checkPress("backOut")) {
-	// Clean up global variables of player
-	global.players.remove(global.players.indexOf(id));
-
-	// Reset camera
-	global.camera.remove();
-
-	// Set playing to false
-	if (gamepadSlot >= 0) {
-		global.controllers.value[gamepadSlot].setPlaying(false);
-	} else {
-		global.keyboard = false;
-	}
-
-	global.playing -= 1;
-
-	// Destroy this object
-	instance_destroy(self);
+	instance_destroy();
 }
 
 // Inherit the parent event

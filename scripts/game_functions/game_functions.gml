@@ -27,3 +27,27 @@ function spawn_player(class=oClassDefault) {
 
 	return player;
 }
+
+/**
+* Clean up everything related to a player object
+*
+* @function		cleanup_player(player)
+* @param		{object}	player			Player object to remove
+* @return		{real}
+*/
+function cleanup_player(player) {
+	// Clean up global variables of player
+	global.players.remove(global.players.indexOf(player.id));
+
+	// Reset camera
+	global.camera.remove();
+
+	// Set playing to false
+	if (player.gamepadSlot >= 0) {
+		global.controllers.value[player.gamepadSlot].setPlaying(false);
+	} else {
+		global.keyboard = false;
+	}
+
+	global.playing -= 1;
+}
