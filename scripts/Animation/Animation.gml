@@ -82,7 +82,6 @@ function AnimationEngineUpdateAll(_key, _val) {
 */
 function Animation(_animationName, _endType=AnimationEndType.loop) : Array() constructor {
 	// Variables
-	uniqueID = irandom(20000);
 	name = _animationName;
 	endType = _endType;
 	currentFrame = 0;
@@ -139,26 +138,27 @@ function AnimationAddFrame(_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset
 /*
 * Draw Animation to screen
 * 
-* @function		AnimationDraw(x, y)
+* @function		AnimationDraw(x, y, [alpha], [color])
 * @param		{real}		x				X coordinate
 * @param		{real}		y				Y coordinate
+* @param		{real}		[alpha]			Override alpha value
+* @param		{color}		[color]			Override color value
 * @return		{self}
 * @see			Frame
 * @see			AnimationFrameStep
 */
-function AnimationDraw(_x, _y, _id=noone) {
+function AnimationDraw(_x, _y, _id=noone, _alpha=1, _color=noone) {
 	// Get current frame
 	var frame = self.value[self.currentFrame];
 
 	// Set flip value
 	var flip = frame.xFlip? -1 : 1;
 
-	// Draw sprite to screen
-	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, flip, 1, frame.rotation, frame.color, 1);
+	// Set color
+	var color = _color? _color : frame.color;
 
-	// Run frame step logic
-	//log("Drawing for entity ", _id);
-	//log("Current Frame", self.currentFrame);
+	// Draw sprite to screen
+	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, flip, 1, frame.rotation, color, _alpha);
 
 	return self
 }

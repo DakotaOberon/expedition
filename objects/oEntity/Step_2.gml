@@ -21,3 +21,8 @@ if (collision_point(xTo, yTo, oWall, 0, 1)) {
 // Update player position
 x = xTo;
 y = yTo;
+
+// Reduce invincible timer
+if (invincibleTimer > 0) {
+	invincibleTimer -= 1;
+}

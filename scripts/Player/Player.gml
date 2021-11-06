@@ -18,6 +18,8 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.add("moveDown", gp_axislv, KeyType.gpAxis, gamepadSlot, 1)
 			.addAlt("moveDown", gp_padd, KeyType.gamepad, gamepadSlot)
 			.add("dash", gp_shoulderlb, KeyType.gamepad, gamepadSlot)
+			.addAlt("dash", gp_shoulderrb, KeyType.gamepad, gamepadSlot)
+			.add("sprint", gp_shoulderl, KeyType.gamepad, gamepadSlot)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
 		self.controls
@@ -30,6 +32,8 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.add("moveDown", ord("S"))
 			.addAlt("moveDown", vk_down)
 			.add("dash", ord("E"))
+			.addAlt("dash", ord("Q"))
+			.add("sprint", vk_shift)
 			.add("backOut", vk_escape);
 	}
 

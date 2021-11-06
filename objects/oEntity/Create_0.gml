@@ -20,7 +20,9 @@ _acceleration = 0.1;
 moveSpeed = 2;
 _direction = 0;
 
+// Combat values
 _health = 0;
+invincibleTimer = 0;
 
 animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;
@@ -34,3 +36,15 @@ _lastY = 0;
 
 xTo = x;
 yTo = y;
+
+color = make_color_hsv(
+	irandom(255),
+	irandom_range(110, 220),
+	irandom_range(60, 255)
+);
+
+// Set color for testing
+animations.updateAll(
+	"color",
+	color
+);
