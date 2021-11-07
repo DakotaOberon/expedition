@@ -27,6 +27,7 @@ tookDamage = false;
 damageTook = 0;
 allyTag = "passive";
 attackDirection = 0;
+inCombat = true;
 
 animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;

@@ -4,11 +4,15 @@ enum animSet {
 	walkL,
 	walkR,
 	walkU,
-	walkD,
-	rollL,
-	rollR,
-	rollU,
-	rollD
+	walkD
+}
+
+enum DefaultClassAnimSet {
+	cleaveIdle,
+	cleaveL,
+	cleaveR,
+	cleaveU,
+	cleaveD
 }
 
 // Entity Base Animation
@@ -43,3 +47,49 @@ global._EntityBaseAnimationTemplate.addAnimation(animSet.walkU, "Walk Up")
 global._EntityBaseAnimationTemplate.addAnimation(animSet.idle, "Idle")
 	.addFrame(sprIndex, 1)
 	.setEndType(AnimationEndType.pause);
+
+global._DefaultClass = new AnimationEngine();
+
+sprIndex = sSword;
+
+global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveIdle, "Cleave Idle")
+	.addFrame(sprIndex, 0)
+	.setEndType(AnimationEndType.pause);
+
+global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveL, "Cleave Left")
+	.addFrame(sprIndex, 0, 3, 0, 0, 0, 45)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 53)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 71)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 89)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 107)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 125)
+	.setEndType(AnimationEndType.pause);
+
+global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveR, "Cleave Right")
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 45)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 27)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 9)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 351)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 333)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 315)
+	.setEndType(AnimationEndType.pause);
+
+global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveU, "Cleave Up")
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 90)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 72)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 54)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 36)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 18)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 0)
+	.setEndType(AnimationEndType.pause);
+
+global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveD, "Cleave Down")
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 180)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 198)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 216)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 234)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 252)
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 270)
+	.setEndType(AnimationEndType.pause);
+
+//_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _rotation=0, _color=c_white

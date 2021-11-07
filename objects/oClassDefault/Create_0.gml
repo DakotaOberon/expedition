@@ -27,11 +27,12 @@ cleave = {
 	radius: 12,
 	xOffSet: 0,
 	yOffSet: -5,
-	distance: 8,
+	distance: 18,
 	cooldown: 15,
 	cooldownTimer: 0,
 	hitb: noone,
-	sprite: sSword
+	currentAnim: DefaultClassAnimSet.cleaveIdle,
+	drawOffset: 10
 }
 
 // Passive

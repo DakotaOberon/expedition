@@ -35,21 +35,56 @@ if (dash.timer > 0) {
 
 // Cleave
 if (controls.checkPress("cleave") && cleave.cooldownTimer <=0) {
+	// Set cleave animation
+	switch (currentAnim) {
+		case animSet.walkL:
+			cleave.currentAnim = DefaultClassAnimSet.cleaveL;
+		break;
+		case animSet.walkR:
+			cleave.currentAnim = DefaultClassAnimSet.cleaveR;
+		break;
+		case animSet.walkU:
+			cleave.currentAnim = DefaultClassAnimSet.cleaveU;
+		break;
+		case animSet.walkD:
+			cleave.currentAnim = DefaultClassAnimSet.cleaveD;
+		break;
+		default:
+			cleave.currentAnim = DefaultClassAnimSet.cleaveIdle;
+		break;
+	}
+
+	// Set timers
 	cleave.timer = cleave.length;
 	cleave.cooldownTimer = cleave.cooldown;
+
+	// Get cleave hitbox x and y
 	var xDir = lengthdir_x(cleave.distance, attackDirection) + cleave.xOffSet;
 	var yDir = lengthdir_y(cleave.distance, attackDirection) + cleave.yOffSet;
-	cleave.hitb = hitcircle(x + xDir, y + yDir, cleave.radius, cleave.damage, cleave.length, allyTag); 
+
+	// Set cleave damage
+	var dmg = cleave.damage;
+	if (dash.timer > 0) {
+		dmg += 5;
+	}
+	// Create hitcircle
+	cleave.hitb = hitcircle(x + xDir, y + yDir, cleave.radius, dmg, cleave.length, allyTag);
+
+	// Make sure attack animation starting at frame 0
+	global._DefaultClass.value[$ cleave.currentAnim].currentFrame = 0;
 }
 
 if (cleave.timer > 0) {
 	if (instance_exists(cleave.hitb)) {
+		// Update cleave x and y
 		var xDir = x + lengthdir_x(cleave.distance, attackDirection) + cleave.xOffSet;
 		var yDir = y + lengthdir_y(cleave.distance, attackDirection) + cleave.yOffSet;
 		cleave.hitb.x = xDir;
 		cleave.hitb.y = yDir;
 	}
 	cleave.timer -= 1;
+	// Increment frame
+	global._DefaultClass.value[$ cleave.currentAnim].frameStep();
 } else if (cleave.cooldownTimer > 0) {
 	cleave.cooldownTimer -= 1;
 }

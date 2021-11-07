@@ -24,8 +24,11 @@ if (dash.timer > 0) {
 	draw_set_alpha(1);
 }
 
-// Draw Cleave
 if (cleave.timer > 0) {
-	var cleaveRotation = (attackDirection + ((cleave.timer - (cleave.length / 2)) * 8));
-	draw_sprite_ext(cleave.sprite, 0, cleave.hitb.x, cleave.hitb.y, 1, 1, cleaveRotation, c_white, 1);
+	// Offset cleave from hitbox
+	var drawDir = point_direction(cleave.hitb.x, cleave.hitb.y, x, y);
+	var xOff = lengthdir_x(cleave.drawOffset, drawDir);
+	var yOff = lengthdir_y(cleave.drawOffset, drawDir);
+	// Draw Cleave
+	global._DefaultClass.value[$ cleave.currentAnim].draw(cleave.hitb.x + xOff, cleave.hitb.y + yOff);
 }
