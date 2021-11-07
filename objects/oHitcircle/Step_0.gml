@@ -8,11 +8,7 @@ if (ttl > 0) {
 // Create temporary ds list to hold collision
 var tmpDS = ds_list_create();
 
-x1 = x - (width / 2);
-y1 = y - (height / 2);
-x2 = x + (width / 2);
-y2 = y + (height / 2);
-collision_rectangle_list(x1, y1, x2, y2, all, 0, 1, tmpDS, true);
+collision_circle_list(x, y, radius, all, 0, 1, tmpDS, true);
 
 // Loop over instances inside hitbox
 for(var i = 0; i < ds_list_size(tmpDS); i++) {

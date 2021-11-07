@@ -26,6 +26,7 @@ invincibleTimer = 0;
 tookDamage = false;
 damageTook = 0;
 allyTag = "passive";
+attackDirection = 0;
 
 animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;

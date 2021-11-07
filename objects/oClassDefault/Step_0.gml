@@ -17,7 +17,7 @@ if (controls.checkPress("dash") && dash.cooldownTimer <= 0) {
 	dash.drawX = x;
 	dash.drawY = y;
 	dash.cooldownTimer = dash.cooldown;
-	
+
 	// Set invincibility
 	if (invincibleTimer < dash.length) {
 		invincibleTimer = dash.length;
@@ -31,4 +31,25 @@ if (dash.timer > 0) {
 	dash.timer -= 1;
 } else if (dash.cooldownTimer > 0) {
 	dash.cooldownTimer -= 1;
+}
+
+// Cleave
+if (controls.checkPress("cleave") && cleave.cooldownTimer <=0) {
+	cleave.timer = cleave.length;
+	cleave.cooldownTimer = cleave.cooldown;
+	var xDir = lengthdir_x(cleave.distance, attackDirection) + cleave.xOffSet;
+	var yDir = lengthdir_y(cleave.distance, attackDirection) + cleave.yOffSet;
+	cleave.hitb = hitcircle(x + xDir, y + yDir, cleave.radius, cleave.damage, cleave.length, allyTag); 
+}
+
+if (cleave.timer > 0) {
+	if (instance_exists(cleave.hitb)) {
+		var xDir = x + lengthdir_x(cleave.distance, attackDirection) + cleave.xOffSet;
+		var yDir = y + lengthdir_y(cleave.distance, attackDirection) + cleave.yOffSet;
+		cleave.hitb.x = xDir;
+		cleave.hitb.y = yDir;
+	}
+	cleave.timer -= 1;
+} else if (cleave.cooldownTimer > 0) {
+	cleave.cooldownTimer -= 1;
 }

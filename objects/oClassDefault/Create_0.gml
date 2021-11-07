@@ -19,6 +19,21 @@ sprint = {
 	_speed: (self.moveSpeed * 1.5)
 }
 
+// Cleave
+cleave = {
+	damage: 9,
+	timer: 0,
+	length: 15,
+	radius: 12,
+	xOffSet: 0,
+	yOffSet: -5,
+	distance: 8,
+	cooldown: 15,
+	cooldownTimer: 0,
+	hitb: noone,
+	sprite: sSword
+}
+
 // Passive
 passive = {
 	timer: 0,

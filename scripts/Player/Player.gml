@@ -20,6 +20,7 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.add("dash", gp_shoulderlb, KeyType.gamepad, gamepadSlot)
 			.addAlt("dash", gp_shoulderrb, KeyType.gamepad, gamepadSlot)
 			.add("sprint", gp_shoulderl, KeyType.gamepad, gamepadSlot)
+			.add("cleave", gp_shoulderr, KeyType.gamepad, gamepadSlot)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
 		self.controls
@@ -34,6 +35,7 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.add("dash", ord("E"))
 			.addAlt("dash", ord("Q"))
 			.add("sprint", vk_shift)
+			.add("cleave", mb_left, KeyType.mouse)
 			.add("backOut", vk_escape);
 	}
 
@@ -53,6 +55,17 @@ function PlayerUpdateDirection() {
 	var dk = self.controls.check("moveDown");
 
 	self._direction = point_direction(0, 0, rk - lk, dk - uk);
+
+	if (self.gamepadSlot >= 0) {
+		// Get right thumbstick values
+		var _rh = gamepad_axis_value(gamepadSlot, gp_axisrh);
+		var _rv =  gamepad_axis_value(gamepadSlot, gp_axisrv);
+		// Set attack direction
+		self.attackDirection = point_direction(0, 0, _rh, _rv);
+	} else {
+		// Set attack direction
+		self.attackDirection = point_direction(self.x, self.y, mouse_x, mouse_y);
+	}
 
 	return self;
 }
