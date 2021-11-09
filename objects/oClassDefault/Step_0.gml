@@ -34,7 +34,7 @@ if (dash.timer > 0) {
 }
 
 // Cleave
-if (controls.checkPress("cleave") && cleave.cooldownTimer <=0) {
+if (controls.checkPress("cleave") && cleave.cooldownTimer <= 0) {
 	// Set cleave animation
 	switch (currentAnim) {
 		case animSet.walkL:
@@ -84,7 +84,67 @@ if (cleave.timer > 0) {
 	}
 	cleave.timer -= 1;
 	// Increment frame
+	// TODO: Don't use global here
 	global._DefaultClass.value[$ cleave.currentAnim].frameStep();
 } else if (cleave.cooldownTimer > 0) {
 	cleave.cooldownTimer -= 1;
+}
+
+if (controls.checkPress("kick") && kick.cooldownTimer <= 0) {
+	// Get nearest potential target
+	var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
+	if (instance_exists(potentialTarget)) {
+		if (point_distance(potentialTarget.x, potentialTarget.y, x, y) <= kick.detectRadius) {
+			// If target is within radius, set target
+			kick.target = potentialTarget;
+		}
+	}
+	kick.timer = kick.length;
+	kick.cooldownTimer = kick.cooldown;
+}
+
+if (kick.timer > 0) {
+	if (!kick.target) {
+		// If no target was found, try to find a target again each frame kick is active
+		var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
+		if (instance_exists(potentialTarget)) {
+			// Check distance to all 4 sides
+			var ptX1 = potentialTarget.bbox_left;
+			var ptX2 = potentialTarget.bbox_right;
+			var ptY1 = potentialTarget.bbox_top;
+			var ptY2 = potentialTarget.bbox_bottom;
+			if (point_distance(x, y, ptX1, ptY1) <= kick.detectRadius
+			|| point_distance(x, y, ptX2, ptY1) <= kick.detectRadius 
+			|| point_distance(x, y, ptX1, ptY2) <= kick.detectRadius 
+			|| point_distance(x, y, ptX2, ptY2) <= kick.detectRadius) {
+				// If target is within radius, set target
+				kick.target = potentialTarget;
+			}
+		}
+	} else {
+		// Turn player towards kick while active
+		var kickDir = point_direction(x, y, kick.target.x, kick.target.y + kick.yOffSet);
+		if (kickDir >= 0 && kickDir <= 45) || (kickDir >= 315 && kickDir <= 360) {
+			currentAnim = animSet.walkR;
+		} else if (kickDir >= 135 && kickDir <= 225) {
+			currentAnim = animSet.walkL;
+		} else if (kickDir > 45 && kickDir < 135) {
+			currentAnim = animSet.walkU;
+		} else {
+			currentAnim = animSet.walkD;
+		}
+	}
+	kick.timer -= 1;
+
+	// Perform kick at end of kick length
+	if (kick.timer == 0) {
+		if (kick.target) {
+			var dmg = kick.parry? kick.parryDamage : kick.damage;
+			var stun = new Status(StatusType.stun, kick.stunDuration);
+			kick.hitb = hitcircle(kick.target.x, kick.target.y, kick.size, dmg, kick.ttl, allyTag, new Array([stun]));
+			kick.target = noone;
+		}
+	}
+} else if (kick.cooldownTimer > 0) {
+	kick.cooldownTimer -= 1;
 }

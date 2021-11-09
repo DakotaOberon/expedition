@@ -51,3 +51,39 @@ function cleanup_player(player) {
 
 	global.playing -= 1;
 }
+
+/**
+* Clean up everything related to a player object
+*
+* @function		instance_nearest_notme(x1, y1, obj, _id, [allyTag])
+* @param		{real}		x			x origin to check from
+* @param		{real}		y			y origin to check from
+* @param		{real}		obj			Object to check for
+* @param		{real}		id			id of object making the check
+* @param		{string}	[allyTag]	Ally tag to avoid
+* @return		{real}
+*/
+function instance_nearest_notme(x1, y1, obj, _id, allyTag=noone) {
+	// Get total number of objects
+	var n = instance_number(obj);
+	// Set initial values
+	var nearest = noone;
+	var nearDis = 10000000;
+	for(var i = 0; i < n; i++) {
+		// Loop over each instance
+		var inst = instance_find(obj, i);
+		if (instance_exists(inst)) {
+			// Check not self or ally
+			if (inst.id != _id) && (inst.allyTag != allyTag) {
+				var instDis = point_distance(inst.x, inst.y, x1, y1);
+				// Compare values
+				if (instDis < nearDis) {
+					nearest = inst;
+					nearDis = instDis;
+				}
+			}
+		}
+	}
+
+	return nearest;
+}

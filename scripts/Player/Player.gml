@@ -21,6 +21,7 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.addAlt("dash", gp_shoulderrb, KeyType.gamepad, gamepadSlot)
 			.add("sprint", gp_shoulderl, KeyType.gamepad, gamepadSlot)
 			.add("cleave", gp_shoulderr, KeyType.gamepad, gamepadSlot)
+			.add("kick", gp_face3, KeyType.gamepad, gamepadSlot)
 			.add("backOut", gp_select, KeyType.gamepad, gamepadSlot);
 	} else {
 		self.controls
@@ -36,6 +37,7 @@ function PlayerControlsInit(gamepadSlot=-1) {
 			.addAlt("dash", ord("Q"))
 			.add("sprint", vk_shift)
 			.add("cleave", mb_left, KeyType.mouse)
+			.add("kick", vk_control)
 			.add("backOut", vk_escape);
 	}
 

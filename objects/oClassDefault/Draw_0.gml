@@ -11,17 +11,7 @@ event_inherited();
 
 // Draw Dash
 if (dash.timer > 0) {
-	// Draw dash wind lines
-	draw_set_alpha(0.2);
-	var windColor = c_white;
-	var i = 1;
-	repeat(4) {
-		var randomXVariance = irandom_range(-8, 8);
-		var randomYVariance = irandom_range(-2, 2);
-		draw_line_color(x + randomXVariance, y - (i * 3) + randomYVariance, dash.drawX + randomXVariance, dash.drawY - (i * 3) + randomYVariance, windColor, windColor);
-		i += 1;
-	}
-	draw_set_alpha(1);
+	wind_lines(x, y, dash.drawX, dash.drawY, 6, 4);
 }
 
 if (cleave.timer > 0) {
@@ -29,6 +19,31 @@ if (cleave.timer > 0) {
 	var drawDir = point_direction(cleave.hitb.x, cleave.hitb.y, x, y);
 	var xOff = lengthdir_x(cleave.drawOffset, drawDir);
 	var yOff = lengthdir_y(cleave.drawOffset, drawDir);
-	// Draw Cleave
-	global._DefaultClass.value[$ cleave.currentAnim].draw(cleave.hitb.x + xOff, cleave.hitb.y + yOff);
+	if (cleave.timer > 4) {
+		// Wind lines
+		var wDir = drawDir;
+		var wYOff = 0;
+		// Set specific wind variables
+		switch (cleave.currentAnim) {
+			case DefaultClassAnimSet.cleaveD:
+				wYOff = 8;
+			case DefaultClassAnimSet.cleaveL:
+				wDir -= 90;
+			break;
+			case DefaultClassAnimSet.cleaveU:
+			case DefaultClassAnimSet.cleaveR:
+				wDir += 90;
+			break;
+		}
+		// Set additional wind values
+		var wW = 8;
+		var wX = lengthdir_x(wW, wDir);
+		var wY = lengthdir_y(wW, wDir);
+		var wLX = lengthdir_x(cleave.timer, wDir);
+		var wLY = lengthdir_y(cleave.timer, wDir);
+		// Draw wind lines
+		wind_lines(cleave.hitb.x - wX, cleave.hitb.y - wY + wYOff, cleave.hitb.x + wX - wLX, cleave.hitb.y + wY - wLY + wYOff, 4, 3);
+	}
+	// Draw cleave
+	global._DefaultClass.value[$ cleave.currentAnim].draw(cleave.hitb.x + xOff, cleave.hitb.y + yOff, 1, c_red);
 }

@@ -1,0 +1,2 @@
+delete hit;
+delete status;

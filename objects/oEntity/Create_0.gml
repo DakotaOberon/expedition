@@ -29,6 +29,13 @@ allyTag = "passive";
 attackDirection = 0;
 inCombat = true;
 
+status = {
+	stun: {
+		type: StatusType.stun,
+		timer: 0
+	}
+}
+
 animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;
 animationsCopy = EntityAnimationTemplateCopy;
