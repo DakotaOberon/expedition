@@ -1,15 +1,15 @@
 {
   "spriteId": {
-    "name": "sEntityBase",
-    "path": "sprites/sEntityBase/sEntityBase.yy",
+    "name": "sWater",
+    "path": "sprites/sWater/sWater.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "oPlayer",
-    "path": "objects/oPlayer/oPlayer.yy",
+    "name": "oSurface",
+    "path": "objects/oSurface/oSurface.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -25,19 +25,16 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":73,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Player",
-    "path": "folders/Objects/Entity/Player.yy",
+    "name": "Map",
+    "path": "folders/Objects/Map.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oClassDefault",
+  "name": "oIce",
   "tags": [],
   "resourceType": "GMObject",
 }

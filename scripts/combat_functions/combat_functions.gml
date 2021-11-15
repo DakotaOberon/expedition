@@ -118,6 +118,6 @@ function apply_status(obj, status) {
 	if (stat.timer < status.length) {
 		stat.timer = status.length;
 	}
-	
+
 	return obj;
 }

@@ -40,7 +40,11 @@ animations = new AnimationEngine();
 animationsInit = EntityAnimationsInit;
 animationsCopy = EntityAnimationTemplateCopy;
 
+updateMovement = EntityUpdateMovement;
+
 animationsInit();
+
+outfit = new Outfit();
 
 // Initiate values used in movement calculations
 _lastX = 0;

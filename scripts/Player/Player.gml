@@ -79,13 +79,6 @@ function PlayerUpdateDirection() {
 * @return		{self}
 */
 function PlayerUpdateMovement() {
-	// Set friction
-	var f = self._friction;
-	if (place_meeting(x, y, oSurface)) {
-		var surf = collision_point(x, y, oSurface, 0, 1);
-		f = surf._friction;
-	}
-
 	// Set x and y goals
 	if (self.checkAnyMoveKeys()) {
 		self._xSpeedGoal = lengthdir_x(self.moveSpeed, self._direction);
@@ -94,17 +87,6 @@ function PlayerUpdateMovement() {
 		self._xSpeedGoal = 0;
 		self._ySpeedGoal = 0;
 	}
-
-	// Get x and y acceleration
-	self._directionGoal = point_direction(self._currentXSpeed, self._currentYSpeed, self._xSpeedGoal, self._ySpeedGoal);
-	self._xAcceleration = lengthdir_x((self._acceleration * f), self._directionGoal);
-	self._yAcceleration = lengthdir_y((self._acceleration * f), self._directionGoal);
-
-	// Update current x and y move speeds
-	self._currentXSpeed = approach(self._currentXSpeed, self._xSpeedGoal, self._xAcceleration);
-	self._currentYSpeed = approach(self._currentYSpeed, self._ySpeedGoal, self._yAcceleration);
-
-	return self;
 }
 
 /**

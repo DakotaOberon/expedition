@@ -45,5 +45,5 @@ if (cleave.timer > 0) {
 		wind_lines(cleave.hitb.x - wX, cleave.hitb.y - wY + wYOff, cleave.hitb.x + wX - wLX, cleave.hitb.y + wY - wLY + wYOff, 4, 3);
 	}
 	// Draw cleave
-	global._DefaultClass.value[$ cleave.currentAnim].draw(cleave.hitb.x + xOff, cleave.hitb.y + yOff, 1, c_red);
+	global._DefaultClass.value[$ cleave.currentAnim].draw(cleave.hitb.x + xOff, cleave.hitb.y + yOff, 1);
 }

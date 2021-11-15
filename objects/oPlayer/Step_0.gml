@@ -1,14 +1,23 @@
 // Run step scripts
 updateDirection();
-updateMovement();
+//updateMovement();
+
+// Set x and y goals
+if (self.checkAnyMoveKeys()) {
+	self._xSpeedGoal = lengthdir_x(self.moveSpeed, self._direction);
+	self._ySpeedGoal = lengthdir_y(self.moveSpeed, self._direction);
+} else {
+	self._xSpeedGoal = 0;
+	self._ySpeedGoal = 0;
+}
+
+// Inherit the parent event
+event_inherited();
 
 // Check for backOut button being pressed
 if (controls.checkPress("backOut")) {
 	instance_destroy();
 }
-
-// Inherit the parent event
-event_inherited();
 
 // Camera Step
 if (camera) {

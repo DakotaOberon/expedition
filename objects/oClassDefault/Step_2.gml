@@ -19,7 +19,5 @@ if (passive.timer > 0) {
 	passive.cooldownTimer -= 1;
 }
 
-
 // Inherit the parent event
 event_inherited();
-

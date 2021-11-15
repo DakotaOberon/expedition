@@ -4,6 +4,8 @@ var xMove, yMove;
 xMove = sign(x - _lastX);
 yMove = sign(y - _lastY);
 
+updateMovement();
+
 if (inCombat) {
 	if (attackDirection >= 0 && attackDirection <= 45) || (attackDirection >= 315 && attackDirection <= 360) {
 		currentAnim = animSet.walkR;

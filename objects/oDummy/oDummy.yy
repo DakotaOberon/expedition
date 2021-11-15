@@ -31,8 +31,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Entity",
-    "path": "folders/Objects/Entity.yy",
+    "name": "Enemies",
+    "path": "folders/Objects/Entity/Enemies.yy",
   },
   "resourceVersion": "1.0",
   "name": "oDummy",

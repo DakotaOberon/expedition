@@ -10,7 +10,7 @@ controls = new Controls();
 controlsInit = PlayerControlsInit;
 checkAnyMoveKeys = PlayerCheckAnyMoveKeys;
 updateDirection = PlayerUpdateDirection;
-updateMovement = PlayerUpdateMovement;
+//updateMovement = PlayerUpdateMovement;
 
 camera = noone;
 
