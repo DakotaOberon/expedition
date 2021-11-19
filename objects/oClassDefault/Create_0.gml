@@ -43,6 +43,8 @@ kick = {
 	ttl: 1,
 	detectRadius: 16,
 	stunDuration: 120,
+	knockbackDuration: 60,
+	knockbackStrength: 3,
 	cooldown: 60,
 	cooldownTimer: 0,
 	// Parry if used during enemy attack
@@ -64,3 +66,4 @@ passive = {
 }
 
 _health = 100;
+_maxHealth = 100;

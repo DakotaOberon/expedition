@@ -21,35 +21,48 @@ switch (state) {
 
 			// Update direction
 			_direction = point_direction(x, y, wanderDestination.x, wanderDestination.y);
-			var currSpd = point_distance(x, y, x + _currentXSpeed, y + _currentYSpeed);
 
-			// Set friction
-			var f = self._friction;
-			var surf = collision_point(x, y, oSurface, 0, 1);
-			if (surf) {	
-				f = surf._friction;
-			}
-
-			var lastI = currSpd / (_acceleration * f);
-			var tempStopDistance = 0;
-			for(var i = 0; i <= lastI; i++) {
-				var addI = i * (_acceleration * f);
-				tempStopDistance += addI;
-			}
-			stopDistance = max(tempStopDistance, stopDistance);
-
-			if (distToDestination <= stopDistance) {
-				_xSpeedGoal = 0;
-				_ySpeedGoal = 0;
-			} else {
-				// Clamp to moveSpeed
-				distToDestination = clamp(distToDestination, 0, moveSpeed);
-				// Set x and y speed goals
-				_xSpeedGoal = lengthdir_x(distToDestination, _direction);
-				_ySpeedGoal = lengthdir_y(distToDestination, _direction);
-			}
+			ai_update_movement(distToDestination)
 
 			wanderTimer -= 1;
+		}
+		
+		if (!target) {
+			var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
+			
+			if (potentialTarget) {
+				if (point_distance(x, y, potentialTarget.x, potentialTarget.y) <= combatSight) {
+					target = potentialTarget;
+				
+					state = EnemyState.combat;
+				}
+			}
+		}
+	break;
+	case EnemyState.combat:
+		inCombat = true;
+		if (instance_exists(target)) {
+			_direction = point_direction(x, y, target.x, target.y);
+			attackDirection = _direction;
+
+			var distToDestination = point_distance(x, y, target.x, target.y);
+			if (distToDestination > loseDistance) {
+				target = noone;
+				state = EnemyState.wander;
+			} else {
+				ai_update_movement(distToDestination)
+			}
+		} else {
+			target = noone;
+			state = EnemyState.wander;
+			var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
+
+			if (potentialTarget) {
+				if (point_distance(x, y, potentialTarget.x, potentialTarget.y) <= combatSight) {
+					target = potentialTarget;
+					state = EnemyState.combat;
+				}
+			}
 		}
 	break;
 }

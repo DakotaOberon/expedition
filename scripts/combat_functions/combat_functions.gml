@@ -113,10 +113,20 @@ function apply_status(obj, status) {
 		case StatusType.stun:
 			var stat = obj.status.stun;
 		break;
+		case StatusType.knockback:
+			var stat = obj.status.knockback;
+		break;
 	}
 
-	if (stat.timer < status.length) {
-		stat.timer = status.length;
+	switch(status.type) {
+		case StatusType.knockback:
+			stat.values.push(status);
+		break;
+		default:
+			if (stat.timer < status.length) {
+				stat.timer = status.length;
+			}
+		break;
 	}
 
 	return obj;

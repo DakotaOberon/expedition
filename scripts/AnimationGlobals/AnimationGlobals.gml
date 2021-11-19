@@ -16,7 +16,8 @@ enum DefaultClassAnimSet {
 }
 
 enum StatusType {
-	stun
+	stun,
+	knockback
 }
 
 // Entity Base Animation

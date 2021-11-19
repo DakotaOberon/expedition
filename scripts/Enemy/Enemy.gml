@@ -1,5 +1,5 @@
 enum EnemyState {
 	wander,
-	attack,
+	combat,
 	flee
 }

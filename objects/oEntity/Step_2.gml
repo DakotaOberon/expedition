@@ -22,6 +22,9 @@ if (collision_point(xTo, yTo, oWall, 0, 1)) {
 x = xTo;
 y = yTo;
 
+_xForce = 0;
+_yForce = 0;
+
 // Reduce invincible timer
 if (invincibleTimer > 0) {
 	invincibleTimer -= 1;

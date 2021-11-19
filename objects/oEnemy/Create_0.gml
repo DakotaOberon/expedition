@@ -23,3 +23,10 @@ wanderDistance = 160;
 stopDistance = 0;
 
 _health = 200;
+_maxHealth = 200;
+allyTag = "enemy";
+
+target = noone;
+combatSight = 120; // Distance to players they will start chasing
+loseDistance = 240; // Distance from target before they stop chasing
+fleeHealth = irandom(_health / 4); // When to switch to flee state

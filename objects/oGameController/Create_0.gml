@@ -14,3 +14,5 @@ global.camera.init(global.players);
 
 // Set fullscreen
 window_set_fullscreen(true);
+
+display_set_gui_size(room_width, room_height);

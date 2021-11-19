@@ -21,7 +21,8 @@ moveSpeed = 2;
 _direction = 0;
 
 // Combat values
-_health = 11;
+_maxHealth = 11;
+_health = _maxHealth;
 invincibleTimer = 0;
 tookDamage = false;
 damageTook = 0;
@@ -33,6 +34,10 @@ status = {
 	stun: {
 		type: StatusType.stun,
 		timer: 0
+	},
+	knockback: {
+		type: StatusType.knockback,
+		values: new Array()
 	}
 }
 

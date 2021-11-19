@@ -141,7 +141,11 @@ if (kick.timer > 0) {
 		if (kick.target) {
 			var dmg = kick.parry? kick.parryDamage : kick.damage;
 			var stun = new Status(StatusType.stun, kick.stunDuration);
-			kick.hitb = hitcircle(kick.target.x, kick.target.y, kick.size, dmg, kick.ttl, allyTag, new Array([stun]));
+			var knockbackDirection = point_direction(x, y, kick.target.x, kick.target.y);
+			var knockback = new Status(StatusType.knockback, kick.knockbackDuration, kick.knockbackStrength, knockbackDirection);
+
+			var statusArray = new Array([stun, knockback]);
+			kick.hitb = hitcircle(kick.target.x, kick.target.y, kick.size, dmg, kick.ttl, allyTag, statusArray);
 			kick.target = noone;
 		}
 	}

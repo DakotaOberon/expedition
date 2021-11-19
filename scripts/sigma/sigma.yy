@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Animations",
-    "path": "folders/Scripts/Animations.yy",
+    "name": "Functions",
+    "path": "folders/Scripts/Functions.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Animation",
+  "name": "sigma",
   "tags": [],
   "resourceType": "GMScript",
 }

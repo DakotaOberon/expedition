@@ -58,18 +58,37 @@ for (var i = 0; i < array_length(effects); i++) {
 	// Get status
 	var stat = variable_struct_get(status, effects[i]);
 
-	if (stat.timer > 0) {
-		// Apply effect
-		switch (stat.type) {
-			case StatusType.stun:
+	switch(stat.type) {
+		case StatusType.knockback:
+			// Apply knockback force
+			var kbArray = status.knockback.values;
+
+			// Decrement so it's safe to remove items
+			for(var j = kbArray.getLength(); j > 0; j--) {
+				var stat = kbArray.value[j - 1];
+				if (stat.length <= 0) {
+					kbArray.remove(j - 1);
+					continue;
+				}
+
+				_xForce += lengthdir_x(stat.strength, stat._direction);
+				_yForce += lengthdir_y(stat.strength, stat._direction);
+
+				// Decrease length
+				stat.length -= 1;
+			}
+		break;
+		case StatusType.stun:
+			if (stat.timer > 0) {
+				// Apply effect
 				_currentXSpeed = 0;
 				_currentYSpeed = 0;
 				_xSpeedGoal = 0;
 				_ySpeedGoal = 0;
-			break;
-		}
 
-		// Decrement timer
-		stat.timer -= 1;
+				// Decrement timer
+				stat.timer -= 1;
+			}
+		break;
 	}
 }

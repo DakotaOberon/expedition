@@ -1,7 +1,8 @@
 /**
 * Spawn a new player object. Returns player id
 *
-* @function		spawn_player()
+* @function		spawn_player([class])
+* @param		{object}	[class]			Player class
 * @return		{real}
 */
 function spawn_player(class=oClassDefault) {
@@ -20,9 +21,10 @@ function spawn_player(class=oClassDefault) {
 			(room_width / 2) + (irandom_range(-5, 5) * 8),
 			room_height / 2,
 			"Instances",
-			oPlayer
+			class
 		)
 	}
+
 	global.players.push(player);
 
 	return player;
