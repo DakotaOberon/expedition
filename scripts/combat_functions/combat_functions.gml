@@ -120,7 +120,8 @@ function apply_status(obj, status) {
 
 	switch(status.type) {
 		case StatusType.knockback:
-			stat.values.push(status);
+			var statusCopy = new Status(status.type, status.length, status.strength, status._direction);
+			stat.values.push(statusCopy);
 		break;
 		default:
 			if (stat.timer < status.length) {

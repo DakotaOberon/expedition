@@ -64,11 +64,21 @@ if (controls.checkPress("cleave") && cleave.cooldownTimer <= 0) {
 
 	// Set cleave damage
 	var dmg = cleave.damage;
+	var statuses = new Array();
+	var knockback = noone;
 	if (dash.timer > 0) {
 		dmg += 5;
+	} else {
+		// Knockback if not dashing
+		knockback = new Status(StatusType.knockback, cleave.knockbackDuration, cleave.knockbackStrength, 0);
+		statuses.push(knockback);
 	}
+
 	// Create hitcircle
-	cleave.hitb = hitcircle(x + xDir, y + yDir, cleave.radius, dmg, cleave.length, allyTag);
+	cleave.hitb = hitcircle(x + xDir, y + yDir, cleave.radius, dmg, cleave.length, allyTag, statuses);
+	if (knockback) {
+		knockback._direction = point_direction(x, y, cleave.hitb.x, cleave.hitb.y);
+	}
 
 	// Make sure attack animation starting at frame 0
 	global._DefaultClass.value[$ cleave.currentAnim].currentFrame = 0;
@@ -94,11 +104,23 @@ if (controls.checkPress("kick") && kick.cooldownTimer <= 0) {
 	// Get nearest potential target
 	var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
 	if (instance_exists(potentialTarget)) {
-		if (point_distance(potentialTarget.x, potentialTarget.y, x, y) <= kick.detectRadius) {
-			// If target is within radius, set target
-			kick.target = potentialTarget;
-		}
+			var ptX1 = potentialTarget.bbox_left;
+			var ptX2 = potentialTarget.bbox_right;
+			var ptY1 = potentialTarget.bbox_top;
+			var ptY2 = potentialTarget.bbox_bottom;
+			if (point_distance(x, y, ptX1, ptY1) <= kick.detectRadius
+			|| point_distance(x, y, ptX2, ptY1) <= kick.detectRadius 
+			|| point_distance(x, y, ptX1, ptY2) <= kick.detectRadius 
+			|| point_distance(x, y, ptX2, ptY2) <= kick.detectRadius) {
+				// If target is within radius, set target
+				kick.target = potentialTarget;
+				if (dash.timer > 0) {
+					kick.dashDirection = dash._direction;
+					kick.dealDash = true;
+				}
+			}
 	}
+
 	kick.timer = kick.length;
 	kick.cooldownTimer = kick.cooldown;
 }
@@ -119,6 +141,10 @@ if (kick.timer > 0) {
 			|| point_distance(x, y, ptX2, ptY2) <= kick.detectRadius) {
 				// If target is within radius, set target
 				kick.target = potentialTarget;
+				if (dash.timer > 0) {
+					kick.dashDirection = dash._direction;
+					kick.dealDash = true;
+				}
 			}
 		}
 	} else {
@@ -142,11 +168,23 @@ if (kick.timer > 0) {
 			var dmg = kick.parry? kick.parryDamage : kick.damage;
 			var stun = new Status(StatusType.stun, kick.stunDuration);
 			var knockbackDirection = point_direction(x, y, kick.target.x, kick.target.y);
+			
 			var knockback = new Status(StatusType.knockback, kick.knockbackDuration, kick.knockbackStrength, knockbackDirection);
-
 			var statusArray = new Array([stun, knockback]);
+
+			if (kick.dealDash) {
+				var knockback2 = new Status(StatusType.knockback, kick.knockbackDuration, kick.dashKnockbackStrength, kick.dashDirection);
+				statusArray.push(knockback2);
+				dmg += 1;
+				log("Damage =", dmg);
+			}
+
 			kick.hitb = hitcircle(kick.target.x, kick.target.y, kick.size, dmg, kick.ttl, allyTag, statusArray);
 			kick.target = noone;
+			kick.dealDash = false;
+			kick.parry = false;
+		} else {
+			kick.cooldownTimer = 0;
 		}
 	}
 } else if (kick.cooldownTimer > 0) {
