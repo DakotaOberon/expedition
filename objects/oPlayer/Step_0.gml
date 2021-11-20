@@ -1,6 +1,5 @@
 // Run step scripts
 updateDirection();
-//updateMovement();
 
 // Set x and y goals
 if (self.checkAnyMoveKeys()) {

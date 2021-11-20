@@ -77,8 +77,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Items",
-    "path": "folders/Sprites/Entity/Items.yy",
+    "name": "Helmets",
+    "path": "folders/Sprites/Entity/Helmets.yy",
   },
   "resourceVersion": "1.0",
   "name": "sHorns",

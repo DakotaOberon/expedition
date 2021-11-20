@@ -15,3 +15,5 @@ updateDirection = PlayerUpdateDirection;
 camera = noone;
 
 allyTag = "friendly";
+
+weapon = sTrident;

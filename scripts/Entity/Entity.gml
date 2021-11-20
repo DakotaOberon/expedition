@@ -18,6 +18,7 @@ function EntityAnimationsInit() {
 * @return		{AnimationEngine}
 * @see			Animation, Frame
 * @see			variable_struct_get_names, variable_struct_set, array_length, struct_copy
+* @TODO			Replace this with AnimationEngineCopy function
 */
 function EntityAnimationTemplateCopy(_template) {
 	// Get all Animation keys from template AnimationEngine

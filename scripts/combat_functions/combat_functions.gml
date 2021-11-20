@@ -78,6 +78,7 @@ function check_hit_list(list, hitArr, status=noone, allyTag="passive") {
 			switch (parent) {
 				case oEntity:
 				case oPlayer:
+				case oEnemy:
 					if (!hitArr.includes(inst) && allyTag != inst.allyTag) {
 						// If not invincible, deal attack
 						if (!inst.invincibleTimer) {

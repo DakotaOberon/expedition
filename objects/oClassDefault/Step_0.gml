@@ -81,7 +81,7 @@ if (controls.checkPress("cleave") && cleave.cooldownTimer <= 0) {
 	}
 
 	// Make sure attack animation starting at frame 0
-	global._DefaultClass.value[$ cleave.currentAnim].currentFrame = 0;
+	cleave.animation.value[$ cleave.currentAnim].currentFrame = 0;
 }
 
 if (cleave.timer > 0) {
@@ -95,7 +95,7 @@ if (cleave.timer > 0) {
 	cleave.timer -= 1;
 	// Increment frame
 	// TODO: Don't use global here
-	global._DefaultClass.value[$ cleave.currentAnim].frameStep();
+	cleave.animation.value[$ cleave.currentAnim].frameStep();
 } else if (cleave.cooldownTimer > 0) {
 	cleave.cooldownTimer -= 1;
 }

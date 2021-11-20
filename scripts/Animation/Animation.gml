@@ -8,6 +8,50 @@ function AnimationEngine() constructor {
 	value = {};
 	addAnimation = AnimationEngineAddAnimation;
 	updateAll = AnimationEngineUpdateAll;
+	copy = AnimationEngineCopy;
+}
+
+/**
+* Deep copies template to remove struct pointers
+*
+* @function		EntityAnimationTemplateCopy(template)
+* @param		{AnimationEngine}	template	AnimationEngine template to copy Animations from
+* @return		{AnimationEngine}
+* @see			Animation, Frame
+* @see			variable_struct_get_names, variable_struct_set, array_length, struct_copy
+*/
+function AnimationEngineCopy(_template) {
+	// Get all Animation keys from template AnimationEngine
+	var _keys = variable_struct_get_names(_template.value);
+
+	// Loop over each Animation
+	for(var i = 0; i < array_length(_keys); i++) {
+		var _templateAnim = _template.value[$ _keys[i]];
+
+		// Get Animation DisplayName to pass in as parameter
+		var _displayName = _templateAnim.name;
+
+		// Get Animation EndType to pass in as parameter
+		var _endType = _templateAnim.endType;
+
+		// Set to blank animation to make it easier to add new frames
+		variable_struct_set(self.value, _keys[i], new Animation(_displayName, _endType))
+
+		// Get array of animation frames
+		var _frames = _templateAnim.value;
+
+		// Get current animation struct writing to
+		var _selfAnimation = self.value[$ _keys[i]]
+
+		for(var j = 0; j < array_length(_frames); j++) {
+			// Add Frame to Animation Array to prepare to overwrite keys
+			_selfAnimation.push(new Frame(sEntityBase, 0));
+			// Copy values from template frames into frames of Animation
+			struct_copy(_selfAnimation.value[j], _frames[j]);
+		}
+	}
+
+	return self;
 }
 
 /**

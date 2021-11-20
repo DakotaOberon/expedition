@@ -33,9 +33,13 @@ cleave = {
 	cooldown: 15,
 	cooldownTimer: 0,
 	hitb: noone,
+	animation: new AnimationEngine(),
 	currentAnim: DefaultClassAnimSet.cleaveIdle,
 	drawOffset: 10
 }
+
+// Cleave init
+cleave.animation.copy(global._DefaultClass);
 
 kick = {
 	timer: 0,
