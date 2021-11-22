@@ -2,6 +2,7 @@
 if (tookDamage) && (passive.cooldownTimer <= 0) {
 	// Set passive timer
 	passive.timer = passive.length;
+
 	// Set passive cooldown
 	passive.cooldownTimer = passive.cooldown;
 

@@ -104,14 +104,7 @@ if (controls.checkPress("kick") && kick.cooldownTimer <= 0) {
 	// Get nearest potential target
 	var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
 	if (instance_exists(potentialTarget)) {
-			var ptX1 = potentialTarget.bbox_left;
-			var ptX2 = potentialTarget.bbox_right;
-			var ptY1 = potentialTarget.bbox_top;
-			var ptY2 = potentialTarget.bbox_bottom;
-			if (point_distance(x, y, ptX1, ptY1) <= kick.detectRadius
-			|| point_distance(x, y, ptX2, ptY1) <= kick.detectRadius 
-			|| point_distance(x, y, ptX1, ptY2) <= kick.detectRadius 
-			|| point_distance(x, y, ptX2, ptY2) <= kick.detectRadius) {
+			if (entity_distance(potentialTarget) <= kick.detectRadius) {
 				// If target is within radius, set target
 				kick.target = potentialTarget;
 				if (dash.timer > 0) {
@@ -126,19 +119,13 @@ if (controls.checkPress("kick") && kick.cooldownTimer <= 0) {
 }
 
 if (kick.timer > 0) {
+	// Increment move frame by 2 to simulate kick
+	animations.value[$ currentAnim].frameStep(2);
 	if (!kick.target) {
 		// If no target was found, try to find a target again each frame kick is active
 		var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
 		if (instance_exists(potentialTarget)) {
-			// Check distance to all 4 sides
-			var ptX1 = potentialTarget.bbox_left;
-			var ptX2 = potentialTarget.bbox_right;
-			var ptY1 = potentialTarget.bbox_top;
-			var ptY2 = potentialTarget.bbox_bottom;
-			if (point_distance(x, y, ptX1, ptY1) <= kick.detectRadius
-			|| point_distance(x, y, ptX2, ptY1) <= kick.detectRadius 
-			|| point_distance(x, y, ptX1, ptY2) <= kick.detectRadius 
-			|| point_distance(x, y, ptX2, ptY2) <= kick.detectRadius) {
+			if (entity_distance(potentialTarget) <= kick.detectRadius) {
 				// If target is within radius, set target
 				kick.target = potentialTarget;
 				if (dash.timer > 0) {
@@ -176,7 +163,6 @@ if (kick.timer > 0) {
 				var knockback2 = new Status(StatusType.knockback, kick.knockbackDuration, kick.dashKnockbackStrength, kick.dashDirection);
 				statusArray.push(knockback2);
 				dmg += 1;
-				log("Damage =", dmg);
 			}
 
 			kick.hitb = hitcircle(kick.target.x, kick.target.y, kick.size, dmg, kick.ttl, allyTag, statusArray);
@@ -188,5 +174,7 @@ if (kick.timer > 0) {
 		}
 	}
 } else if (kick.cooldownTimer > 0) {
+	// Increment move step by 2 to indicate when it's off cooldown
+	animations.value[$ currentAnim].frameStep(2);
 	kick.cooldownTimer -= 1;
 }

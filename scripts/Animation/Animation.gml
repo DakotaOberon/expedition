@@ -182,16 +182,17 @@ function AnimationAddFrame(_sprIndex, _subImg, _length=1, _flip=FrameFlip.none, 
 /*
 * Draw Animation to screen
 * 
-* @function		AnimationDraw(x, y, [alpha], [color])
+* @function		AnimationDraw(x, y, [alpha], [color], [rotation])
 * @param		{real}		x				X coordinate
 * @param		{real}		y				Y coordinate
 * @param		{real}		[alpha]			Override alpha value
 * @param		{color}		[color]			Override color value
+* @param		{real}		[rotation]		Override rotation value
 * @return		{self}
 * @see			Frame
 * @see			AnimationFrameStep
 */
-function AnimationDraw(_x, _y, _alpha=1, _color=noone) {
+function AnimationDraw(_x, _y, _alpha=1, _color=noone, _rotation=noone) {
 	// Get current frame
 	var frame = self.value[self.currentFrame];
 
@@ -212,8 +213,10 @@ function AnimationDraw(_x, _y, _alpha=1, _color=noone) {
 	// Set color
 	var color = _color? _color : frame.color;
 
+	var rotation = _rotation? _rotation : frame.rotation;
+
 	// Draw sprite to screen
-	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, xScale, yScale, frame.rotation, color, _alpha);
+	draw_sprite_ext(frame.spriteIndex, frame.subImg, _x + frame.xOffset, _y + frame.yOffset, xScale, yScale, rotation, color, _alpha);
 
 	return self
 }

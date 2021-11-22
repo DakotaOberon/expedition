@@ -50,6 +50,7 @@ updateMovement = EntityUpdateMovement;
 animationsInit();
 
 outfit = new Outfit();
+weapon = noone;
 
 // Initiate values used in movement calculations
 _lastX = 0;

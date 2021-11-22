@@ -1,3 +1,5 @@
+#region Enums
+
 // EntityBase animation set
 enum animSet {
 	idle,
@@ -15,10 +17,18 @@ enum DefaultClassAnimSet {
 	cleaveD
 }
 
+enum EnemyImpAnimSet {
+	poke
+}
+
 enum StatusType {
 	stun,
 	knockback
 }
+
+#endregion
+
+#region Entity Base Animation Templete
 
 // Entity Base Animation
 global._EntityBaseAnimationTemplate = new AnimationEngine();
@@ -52,6 +62,9 @@ global._EntityBaseAnimationTemplate.addAnimation(animSet.idle, "Idle")
 	.addFrame(sprIndex, 1)
 	.setEndType(AnimationEndType.pause);
 
+#endregion
+
+#region Default Class
 global._DefaultClass = new AnimationEngine();
 sprIndex = sSword;
 
@@ -95,6 +108,10 @@ global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveD, "Cleave Down")
 	.addFrame(sprIndex, 0, 1, FrameFlip.none, 0, 0, 270)
 	.setEndType(AnimationEndType.pause);
 
+#endregion
+
+#region Statuses
+
 global._StatusStun = new AnimationEngine();
 sprIndex = sStatusStun;
 
@@ -107,5 +124,18 @@ global._StatusStun.addAnimation(StatusType.stun, "Stun")
 	.addFrame(sprIndex, 1, 6, FrameFlip.both, 0, -25)
 	.addFrame(sprIndex, 2, 6, FrameFlip.both, 0, -25)
 	.addFrame(sprIndex, 3, 6, FrameFlip.both, 0, -25);
+
+#endregion
+
+#region Imp Enemy
+
+global._EnemyImp = new AnimationEngine();
+sprIndex = sTrident;
+
+global._EnemyImp.addAnimation(EnemyImpAnimSet.poke, "Poke")
+	.addFrame(sprIndex, 0, 1, 0, 0, 0, 315)
+	.setEndType(AnimationEndType.pause);
+
+#endregion
 
 //_sprIndex, _subImg, _length=1, _xFlip=false, _xOffset=0, _yOffset=0, _rotation=0, _color=c_white

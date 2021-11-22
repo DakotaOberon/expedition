@@ -10,3 +10,6 @@ if (instance_exists(kick.target)) {
 	// Draw wind lines
 	wind_lines(x + kickWXOff, y + kickWYOff, kick.target.x, kickY1, 2, 3);
 }
+
+// Inherit the parent event
+event_inherited();

@@ -41,6 +41,10 @@ function Array(val=[]) constructor {
 	unshift = ArrayUnshift;
 
 	getLength = ArrayLength;
+	
+	cleanup = function() {
+		delete self.value;
+	}
 }
 
 /**

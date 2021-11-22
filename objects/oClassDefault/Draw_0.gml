@@ -1,9 +1,9 @@
 // Draw Passive
 if (passive.timer > 0) {
-	animations.value[$ currentAnim].draw(x - 1, y, id, 0.5, c_red);
-	animations.value[$ currentAnim].draw(x + 1, y, id, 0.5, c_red);
-	animations.value[$ currentAnim].draw(x, y - 1, id, 0.5, c_red);
-	animations.value[$ currentAnim].draw(x, y + 1, id, 0.5, c_red);
+	animations.value[$ currentAnim].draw(x - 1, y, 0.5, c_red);
+	animations.value[$ currentAnim].draw(x + 1, y, 0.5, c_red);
+	animations.value[$ currentAnim].draw(x, y - 1, 0.5, c_red);
+	animations.value[$ currentAnim].draw(x, y + 1, 0.5, c_red);
 }
 
 // Inherit the parent event

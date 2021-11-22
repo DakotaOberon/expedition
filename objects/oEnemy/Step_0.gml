@@ -26,7 +26,7 @@ switch (state) {
 
 			wanderTimer -= 1;
 		}
-		
+
 		if (!target) {
 			var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
 			
@@ -50,7 +50,23 @@ switch (state) {
 				target = noone;
 				state = EnemyState.wander;
 			} else {
-				ai_update_movement(distToDestination)
+				// Simple collsion system
+				var col = collision_point(x + _currentXSpeed, y + _currentYSpeed, oWall, 0, 1);
+				
+				var dirChoice = 0;
+				if (!col) {
+					// Entity Collision
+					col = collision_point(x + _currentXSpeed, y + _currentYSpeed, oEntity, 0, 1);
+					if (col) {
+						dirChoice = choose(-45, 45);
+					}
+				} else {
+					// Wall Collision
+					dirChoice = choose(-90, 90);
+				}
+
+				_direction += dirChoice;
+				ai_update_movement(distToDestination);
 			}
 		} else {
 			target = noone;

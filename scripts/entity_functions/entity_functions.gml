@@ -42,3 +42,60 @@ function ai_update_movement(distance, _id=self) {
 		_id._ySpeedGoal = lengthdir_y(distance, _id._direction);
 	}
 }
+
+/**
+* Check for collisions within bbox
+* 
+* @function		collision_on_me([xOffset], [yOffset])
+* @param		{real}		[xOffset]		x Offset to check at
+* @param		{real}		[yOffset]		y Offset to check at
+* @return		{Array}
+*/
+function collision_on_me(xOffset=0, yOffset=0) {
+	var tmpDS = ds_list_create();
+	collision_rectangle_list(
+		self.bbox_left + xOffset,
+		self.bbox_top + yOffset,
+		self.bbox_right + xOffset,
+		self.bbox_bottom + yOffset,
+		oEntity,
+		false,
+		true,
+		tmpDS,
+		false
+	);
+
+	collision_rectangle_list(
+		self.bbox_left + xOffset,
+		self.bbox_top + yOffset,
+		self.bbox_right + xOffset,
+		self.bbox_bottom + yOffset,
+		oWall,
+		false,
+		true,
+		tmpDS,
+		false
+	);
+
+	var returnArray = new Array();
+
+	for(var i = 0; i < ds_list_size(tmpDS); i++) {
+		returnArray.push(tmpDS[| i]);
+	}
+
+	return returnArray;
+}
+
+function entity_distance(target) {
+	var ptX1 = target.bbox_left;
+	var ptX2 = target.bbox_right;
+	var ptY1 = target.bbox_top;
+	var ptY2 = target.bbox_bottom;
+
+	var d1 = point_distance(x, y, ptX1, ptY1);
+	var d2 = point_distance(x, y, ptX2, ptY1);
+	var d3 = point_distance(x, y, ptX1, ptY2);
+	var d4 = point_distance(x, y, ptX2, ptY2);
+
+	return min(d1, d2, d3, d4);
+}
