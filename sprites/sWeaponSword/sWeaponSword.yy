@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sSword/sSword.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sSword/sSword.yy",},"LayerId":{"name":"cdc91eff-8eb4-44a0-aa40-ee84aa37dbb4","path":"sprites/sSword/sSword.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sSword","path":"sprites/sSword/sSword.yy",},"resourceVersion":"1.0","name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sWeaponSword/sWeaponSword.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sWeaponSword/sWeaponSword.yy",},"LayerId":{"name":"cdc91eff-8eb4-44a0-aa40-ee84aa37dbb4","path":"sprites/sWeaponSword/sWeaponSword.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sWeaponSword","path":"sprites/sWeaponSword/sWeaponSword.yy",},"resourceVersion":"1.0","name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"sSword","path":"sprites/sSword/sSword.yy",},
+    "spriteId": {"name":"sWeaponSword","path":"sprites/sWeaponSword/sWeaponSword.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"0ce348d3-8ed3-4645-b991-efe45ef61f97","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sSword/sSword.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"0ce348d3-8ed3-4645-b991-efe45ef61f97","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"890baa3f-ebe9-4adc-9e3e-1e0781f0b1ee","path":"sprites/sWeaponSword/sWeaponSword.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,9 +58,9 @@
     "yorigin": 14,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"sSword","path":"sprites/sSword/sSword.yy",},
+    "parent": {"name":"sWeaponSword","path":"sprites/sWeaponSword/sWeaponSword.yy",},
     "resourceVersion": "1.3",
-    "name": "sSword",
+    "name": "sWeaponSword",
     "tags": [],
     "resourceType": "GMSequence",
   },
@@ -73,7 +73,7 @@
     "path": "folders/Sprites/Entity/Weapons.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sSword",
+  "name": "sWeaponSword",
   "tags": [],
   "resourceType": "GMSprite",
 }

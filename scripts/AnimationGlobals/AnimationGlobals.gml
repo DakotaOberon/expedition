@@ -66,7 +66,7 @@ global._EntityBaseAnimationTemplate.addAnimation(animSet.idle, "Idle")
 
 #region Default Class
 global._DefaultClass = new AnimationEngine();
-sprIndex = sSword;
+sprIndex = sWeaponSword;
 
 global._DefaultClass.addAnimation(DefaultClassAnimSet.cleaveIdle, "Cleave Idle")
 	.addFrame(sprIndex, 0)
@@ -130,7 +130,7 @@ global._StatusStun.addAnimation(StatusType.stun, "Stun")
 #region Imp Enemy
 
 global._EnemyImp = new AnimationEngine();
-sprIndex = sTrident;
+sprIndex = sWeaponTrident;
 
 global._EnemyImp.addAnimation(EnemyImpAnimSet.poke, "Poke")
 	.addFrame(sprIndex, 0, 1, 0, 0, 0, 315)

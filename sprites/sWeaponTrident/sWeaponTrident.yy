@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sTrident/sTrident.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sTrident/sTrident.yy",},"LayerId":{"name":"cdc91eff-8eb4-44a0-aa40-ee84aa37dbb4","path":"sprites/sTrident/sTrident.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sTrident","path":"sprites/sTrident/sTrident.yy",},"resourceVersion":"1.0","name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},"LayerId":{"name":"cdc91eff-8eb4-44a0-aa40-ee84aa37dbb4","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sWeaponTrident","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},"resourceVersion":"1.0","name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"sTrident","path":"sprites/sTrident/sTrident.yy",},
+    "spriteId": {"name":"sWeaponTrident","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"f3dcb92e-1d31-4f87-a8e4-a158d610a88a","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sTrident/sTrident.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"f3dcb92e-1d31-4f87-a8e4-a158d610a88a","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"cfd26daf-5dc0-44ea-a983-e46a32ce9619","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,9 +58,9 @@
     "yorigin": 14,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"sTrident","path":"sprites/sTrident/sTrident.yy",},
+    "parent": {"name":"sWeaponTrident","path":"sprites/sWeaponTrident/sWeaponTrident.yy",},
     "resourceVersion": "1.3",
-    "name": "sTrident",
+    "name": "sWeaponTrident",
     "tags": [],
     "resourceType": "GMSequence",
   },
@@ -73,7 +73,7 @@
     "path": "folders/Sprites/Entity/Weapons.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sTrident",
+  "name": "sWeaponTrident",
   "tags": [],
   "resourceType": "GMSprite",
 }

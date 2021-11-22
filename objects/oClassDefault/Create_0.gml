@@ -69,10 +69,12 @@ kick = {
 // Passive
 passive = {
 	timer: 0,
-	length: 300,
-	cooldown: 300,
+	length: 30,
+	cooldown: 30,
 	cooldownTimer: 0
 }
 
 _health = 100;
 _maxHealth = 100;
+
+weapon = sWeaponSword;

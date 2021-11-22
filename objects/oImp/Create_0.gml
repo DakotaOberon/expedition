@@ -14,8 +14,8 @@ fireball = {
 }
 
 poke = {
-	leadTime: 60,
-	leadTimer: 60,
+	leadTime: 30,
+	leadTimer: 30,
 	leadOffset: 4,
 	length: 16,
 	timer: 16,
@@ -33,3 +33,5 @@ poke = {
 	yOffset: -6,
 	radius: 4
 }
+
+weapon = sWeaponTrident;
