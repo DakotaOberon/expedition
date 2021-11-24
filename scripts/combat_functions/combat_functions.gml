@@ -65,7 +65,7 @@ function hitcircle(x1, y1, radius, damage, ttl, allyTag="passive", statusArray=n
 * @param		{Array}		[statusArray]	Array of statuses to apply to targets hit
 * @return		{object}
 */
-function create_projectile(x1, y1, _direction=0, _speed=0, projectileValues=noone) {
+function create_projectile(x1, y1, _direction=0, _speed=0, projectileValues=noone, statusArray=noone) {
 	var p = instance_create_layer(x1, y1, "Instances", oProjectile);
 	p._direction = _direction;
 	p._speed = _speed;
@@ -79,7 +79,7 @@ function create_projectile(x1, y1, _direction=0, _speed=0, projectileValues=noon
 		}
 	}
 
-	p.hitb = p.hitbCreate(x1, y1);
+	p.hitb = p.hitbCreate(x1, y1, statusArray);
 }
 
 /**
@@ -178,4 +178,15 @@ function apply_status(obj, status) {
 	}
 
 	return obj;
+}
+
+function create_dead(x1, y1, sprite=sDeadBody, color=c_white, ttl=360) {
+	var db = instance_create_layer(x1, y1, "Instances", oDeadBody);
+
+	db.sprite = sprite;
+	db.ttl = ttl;
+	db.alphaDec = (1 / ttl);
+	db.color = color;
+
+	return db;
 }

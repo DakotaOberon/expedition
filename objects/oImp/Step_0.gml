@@ -2,8 +2,6 @@
 event_inherited();
 
 switch (state) {
-	case EnemyState.wander:
-	break;
 	case EnemyState.combat:
 		if (target) {
 			if (!isAttacking) {
@@ -16,11 +14,8 @@ switch (state) {
 						}
 					}
 				} else if (entDist <= fireball.attackDistance) {
-					log("Wanna Fireball", fireball.cooldownTimer);
 					if (fireball.cooldownTimer <= 0) {
-						log("Can Fireball");
 						if (!fireball.attacking) {
-							log("Will Fireball");
 							fireball.attacking = true;
 							fireball._direction = attackDirection;
 						}
@@ -47,7 +42,9 @@ switch (state) {
 						var x1 = x + lengthdir_x(poke.distance - poke.leadOffset, poke._direction);
 						var y1 = y + lengthdir_y(poke.distance - poke.leadOffset, poke._direction);
 						if (!poke.hitb) {
-							poke.hitb = hitcircle(x1, y1, poke.radius, poke.damage, poke.length, allyTag);
+							var knockb = new Status(StatusType.knockback, poke.knockbackLength, poke.knockbackStrength, attackDirection);
+							var statArr = new Array([knockb]);
+							poke.hitb = hitcircle(x1, y1, poke.radius, poke.damage, poke.length, allyTag, statArr);
 						} else {
 							var xOff = lengthdir_x(poke.hitbDirOffset, poke._direction);
 							var yOff = lengthdir_y(poke.hitbDirOffset, poke._direction);
@@ -73,7 +70,9 @@ switch (state) {
 					fireball.leadTimer -= 1;
 				} else {
 					// Attack
-					create_projectile(x, y - fireball.yStart, fireball._direction, fireball._speed, fireball.projectile);
+					var knockb = new Status(StatusType.knockback, fireball.knockbackLength, fireball.knockbackStrength, attackDirection);
+					var statArr = new Array([knockb]);
+					create_projectile(x, y - fireball.yStart, fireball._direction, fireball._speed, fireball.projectile, statArr);
 
 					// Reset
 					fireball.cooldownTimer = fireball.cooldown;

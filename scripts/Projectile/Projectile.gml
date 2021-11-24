@@ -27,12 +27,11 @@ enum HitboxType {
 	circle
 }
 
-function ProjectileSetHitboxValues(type=HitboxType.circle, radiusOrW=1, height=1, damage=0, ttl=1, allyTag="passive", statusArray=noone) {
+function ProjectileSetHitboxValues(type=HitboxType.circle, radiusOrW=1, height=1, damage=0, ttl=1, allyTag="passive") {
 	hitbValues.type = type;
 	hitbValues.damage = damage;
 	hitbValues.ttl = ttl;
 	hitbValues.allyTag = allyTag;
-	hitbValues.statusArray = statusArray;
 
 	switch (type) {
 		case HitboxType.circle:
@@ -45,14 +44,14 @@ function ProjectileSetHitboxValues(type=HitboxType.circle, radiusOrW=1, height=1
 	}
 }
 
-function ProjectileCreateHitbox(x1, y1) {
+function ProjectileCreateHitbox(x1, y1, statusArray=noone) {
 	var hit = noone;
 	switch (hitbValues.type) {
 		case HitboxType.circle:
-			hit = hitcircle(x1, y1, hitbValues.radius, hitbValues.damage, hitbValues.ttl, hitbValues.allyTag, hitbValues.statusArray);
+			hit = hitcircle(x1, y1, hitbValues.radius, hitbValues.damage, hitbValues.ttl, hitbValues.allyTag, statusArray);
 		break;
 		case HitboxType.box:
-			hit = hitbox(x1, y1, hitbValues.width, hitbValues.height, hitbValues.damage, hitbValues.ttl, hitbValues.allyTag, hitbValues.statusArray);
+			hit = hitbox(x1, y1, hitbValues.width, hitbValues.height, hitbValues.damage, hitbValues.ttl, hitbValues.allyTag, statusArray);
 		break;
 	}
 

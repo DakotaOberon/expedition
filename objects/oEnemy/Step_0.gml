@@ -29,7 +29,7 @@ switch (state) {
 
 		if (!target) {
 			var potentialTarget = instance_nearest_notme(x, y, oEntity, id, allyTag);
-			
+
 			if (potentialTarget) {
 				if (point_distance(x, y, potentialTarget.x, potentialTarget.y) <= combatSight) {
 					target = potentialTarget;

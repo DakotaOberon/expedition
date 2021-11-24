@@ -25,6 +25,8 @@ fireball = {
 	_speed: 4,
 	size: 4,
 	yStart: 12,
+	knockbackLength: 5,
+	knockbackStrength: 1
 }
 
 fireball.leadGrowth = (1 / fireball.leadTime);
@@ -50,7 +52,9 @@ poke = {
 	hitbXOffset: -1,
 	_direction: 0,
 	yOffset: -6,
-	radius: 4
+	radius: 4,
+	knockbackLength: 16,
+	knockbackStrength: 1
 }
 
 weapon = sWeaponTrident;
@@ -58,10 +62,16 @@ weapon = sWeaponTrident;
 status.stun.run = function reset() {
 	isAttacking = false;
 	// Reset poke
-	poke.cooldownTimer = poke.cooldown;
 	poke.attacking = false;
 	poke.timer = poke.length;
 	poke.leadTimer = poke.leadTime;
 	poke.leadDirectionTimer = poke.leadDirectionTime;
 	poke.distance = 0;
+
+	// Reset fireball
+	fireball.attacking = false;
+	fireball.leadTimer = fireball.leadTime;
+	fireball.leadSize = 0;
 }
+
+deadSprite = sAsh;

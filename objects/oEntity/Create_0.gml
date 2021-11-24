@@ -37,7 +37,7 @@ status = {
 	stun: {
 		type: StatusType.stun,
 		timer: 0,
-		run: blank()
+		run: blank
 	},
 	knockback: {
 		type: StatusType.knockback,
@@ -68,6 +68,8 @@ color = make_color_hsv(
 	irandom_range(110, 220),
 	irandom_range(60, 255)
 );
+
+deadSprite = sDeadBody;
 
 // Set color for testing
 animations.updateAll(

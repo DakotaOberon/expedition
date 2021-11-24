@@ -22,8 +22,8 @@ wanderDestination = {
 wanderDistance = 160;
 stopDistance = 0;
 
-_health = 200;
-_maxHealth = 200;
+_health = 20;
+_maxHealth = 20;
 allyTag = AllyTag.enemy;
 
 target = noone;
@@ -32,3 +32,5 @@ loseDistance = 240; // Distance from target before they stop chasing
 fleeHealth = irandom(_health / 4); // When to switch to flee state
 
 telegraph = false;
+
+attackPassive = false;

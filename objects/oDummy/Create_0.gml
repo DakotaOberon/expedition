@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-allyTag = AllyTag.passive;
+allyTag = AllyTag.enemy;
 
 _health = 100000;
 
