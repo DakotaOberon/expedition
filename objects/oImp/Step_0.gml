@@ -6,11 +6,24 @@ switch (state) {
 	break;
 	case EnemyState.combat:
 		if (target) {
-			if (entity_distance(target) <= poke.maxDistance) {
-				if (poke.cooldownTimer <= 0) {
-					if (!poke.attacking) {
-						poke.attacking = true;
-						poke._direction = attackDirection;
+			if (!isAttacking) {
+				var entDist = entity_distance(target);
+				if (entDist <= poke.maxDistance) {
+					if (poke.cooldownTimer <= 0) {
+						if (!poke.attacking) {
+							poke.attacking = true;
+							poke._direction = attackDirection;
+						}
+					}
+				} else if (entDist <= fireball.attackDistance) {
+					log("Wanna Fireball", fireball.cooldownTimer);
+					if (fireball.cooldownTimer <= 0) {
+						log("Can Fireball");
+						if (!fireball.attacking) {
+							log("Will Fireball");
+							fireball.attacking = true;
+							fireball._direction = attackDirection;
+						}
 					}
 				}
 			}
@@ -51,6 +64,23 @@ switch (state) {
 						poke.distance = 0;
 					}
 				}
+			} else if (fireball.attacking) {
+				isAttacking = true;
+				if (fireball.leadTimer > 0) {
+					telegraph = true;
+					fireball._direction = attackDirection;
+					fireball.leadSize += fireball.leadGrowth;
+					fireball.leadTimer -= 1;
+				} else {
+					// Attack
+					create_projectile(x, y - fireball.yStart, fireball._direction, fireball._speed, fireball.projectile);
+
+					// Reset
+					fireball.cooldownTimer = fireball.cooldown;
+					fireball.attacking = false;
+					fireball.leadTimer = fireball.leadTime;
+					fireball.leadSize = 0;
+				}
 			} else {
 				isAttacking = false;
 			}
@@ -60,6 +90,10 @@ switch (state) {
 
 if (poke.cooldownTimer > 0) {
 	poke.cooldownTimer -= 1;
+}
+
+if (fireball.cooldownTimer > 0) {
+	fireball.cooldownTimer -= 1;
 }
 
 if (!instance_exists(poke.hitb)) {

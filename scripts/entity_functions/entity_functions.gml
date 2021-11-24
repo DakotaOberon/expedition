@@ -1,3 +1,9 @@
+enum AllyTag {
+	passive,
+	friendly,
+	enemy
+}
+
 /**
 * Get the current friction of an entity
 *

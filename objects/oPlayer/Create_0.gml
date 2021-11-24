@@ -14,4 +14,4 @@ updateDirection = PlayerUpdateDirection;
 
 camera = noone;
 
-allyTag = "friendly";
+allyTag = AllyTag.friendly;

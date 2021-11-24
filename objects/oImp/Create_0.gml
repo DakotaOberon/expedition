@@ -10,8 +10,25 @@ animations.updateAll(
 );
 
 fireball = {
-	
+	leadTime: 30,
+	leadTimer: 30,
+	leadSize: 0,
+	leadGrowth: 0,
+	damage: 1,
+	ttl: 180,
+	cooldown: 120,
+	cooldownTimer: 0,
+	projectile: new Projectile(sProjectileFireball, true, 320, true, 3),
+	attackDistance: 120,
+	attacking: false,
+	_direction: 0,
+	_speed: 4,
+	size: 4,
+	yStart: 12,
 }
+
+fireball.leadGrowth = (1 / fireball.leadTime);
+fireball.projectile.setHitbox(HitboxType.circle, fireball.size, 0, fireball.damage, fireball.ttl, AllyTag.enemy, noone);
 
 poke = {
 	leadTime: 30,
@@ -37,3 +54,14 @@ poke = {
 }
 
 weapon = sWeaponTrident;
+
+status.stun.run = function reset() {
+	isAttacking = false;
+	// Reset poke
+	poke.cooldownTimer = poke.cooldown;
+	poke.attacking = false;
+	poke.timer = poke.length;
+	poke.leadTimer = poke.leadTime;
+	poke.leadDirectionTimer = poke.leadDirectionTime;
+	poke.distance = 0;
+}

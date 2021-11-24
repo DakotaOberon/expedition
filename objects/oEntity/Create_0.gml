@@ -28,7 +28,7 @@ tookDamage = false;
 lastTookDamage = 0;
 lastDamageTook = 0;
 damageTook = 0;
-allyTag = "passive";
+allyTag = AllyTag.passive;
 attackDirection = 0;
 inCombat = true;
 isAttacking = false;
@@ -36,7 +36,8 @@ isAttacking = false;
 status = {
 	stun: {
 		type: StatusType.stun,
-		timer: 0
+		timer: 0,
+		run: blank()
 	},
 	knockback: {
 		type: StatusType.knockback,

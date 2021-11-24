@@ -1,10 +1,11 @@
 // Changeable values
 damage = 0;
 ttl = 1;
-allyTag = "passive";
+allyTag = AllyTag.passive;
 
 // Hit array
-hit = new Array();
+hit = new HitEntityArray();
+hitFreq = 30;
 status = noone;
 
 depth = -800;

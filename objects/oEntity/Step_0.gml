@@ -86,6 +86,8 @@ for (var i = 0; i < array_length(effects); i++) {
 				_xSpeedGoal = 0;
 				_ySpeedGoal = 0;
 
+				// Run stun function
+				status.stun.run();
 				// Decrement timer
 				stat.timer -= 1;
 			}

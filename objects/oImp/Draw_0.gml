@@ -11,3 +11,9 @@ if (poke.attacking) {
 
 	global._EnemyImp.value[$ EnemyImpAnimSet.poke].draw(x1, y1 + poke.yOffset, 1, noone, pokeDir);
 }
+
+if (fireball.attacking) {
+	if (fireball.leadTimer > 0) {
+		draw_sprite_ext(sProjectileFireball, 0, x, y - fireball.yStart, fireball.leadSize, fireball.leadSize, attackDirection, c_white, fireball.leadSize);
+	}
+}

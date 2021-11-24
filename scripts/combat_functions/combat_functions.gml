@@ -58,6 +58,31 @@ function hitcircle(x1, y1, radius, damage, ttl, allyTag="passive", statusArray=n
 }
 
 /**
+* Create a projectile
+* 
+* @function		create_projectile(x1, y1, [_direction], [_speed], [projectileValues])
+* @param		{real}		x1				x of center
+* @param		{Array}		[statusArray]	Array of statuses to apply to targets hit
+* @return		{object}
+*/
+function create_projectile(x1, y1, _direction=0, _speed=0, projectileValues=noone) {
+	var p = instance_create_layer(x1, y1, "Instances", oProjectile);
+	p._direction = _direction;
+	p._speed = _speed;
+
+	if (projectileValues) {
+		var keys = variable_struct_get_names(projectileValues);
+		for(var i = 0; i < array_length(keys); i++) {
+			var name = keys[i];
+			var val = variable_struct_get(projectileValues, name);
+			variable_instance_set(p, name, val);
+		}
+	}
+
+	p.hitb = p.hitbCreate(x1, y1);
+}
+
+/**
 * Check ds list of targets and apply attack to applicable targets
 * 
 * @function		check_hit_list(list, hitArr, status=noone, [allyTag])
@@ -66,26 +91,28 @@ function hitcircle(x1, y1, radius, damage, ttl, allyTag="passive", statusArray=n
 * @param		{Array}		[status]		Array of statuses to apply to applicable targets
 * @param		{string}	[allyTag]		Tag of which entities to not damage
 */
-function check_hit_list(list, hitArr, status=noone, allyTag="passive") {
+function check_hit_list(list, hitArr, status=noone, allyTag="passive", hitFreq=30) {
 	if (hitArr) {
 		// Loop over instances inside hitbox
 		for(var i = 0; i < ds_list_size(list); i++) {
 			// Get instance and parent
 			var inst = list[| i];
-			var parent = object_get_parent(inst.object_index)
+			var parent = object_get_parent(inst.object_index);
 
 			// Complete attack
 			switch (parent) {
 				case oEntity:
 				case oPlayer:
 				case oEnemy:
-					if (!hitArr.includes(inst) && allyTag != inst.allyTag) {
+					if (hitArr.findEntity(inst) < 0 && allyTag != inst.allyTag) {
 						// If not invincible, deal attack
 						if (!inst.invincibleTimer) {
 							inst._health -= damage;
 							inst.tookDamage = true;
 							inst.damageTook = damage;
-							hitArr.push(inst);
+							// Create HitEntity
+							var hitE = new HitEntity(inst, hitFreq);
+							hitArr.push(hitE);
 							if (status) {
 								// Apply statuses
 								for (var j = 0; j < status.getLength(); j++) {
@@ -99,6 +126,25 @@ function check_hit_list(list, hitArr, status=noone, allyTag="passive") {
 				
 		}
 	}
+}
+
+function HitEntityArray() : Array() constructor {
+	findEntity = HitEntityArrayFindEntity;
+}
+
+function HitEntityArrayFindEntity(_inst) {
+	for(var i = 0; i < self.getLength(); i++) {
+		if (self.value[i].entity == _inst) {
+			return i;
+		}
+	}
+
+	return noone;
+}
+
+function HitEntity(inst, _ttl=30) constructor {
+	entity = inst;
+	ttl = _ttl;
 }
 
 /**

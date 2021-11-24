@@ -24,7 +24,7 @@ stopDistance = 0;
 
 _health = 200;
 _maxHealth = 200;
-allyTag = "enemy";
+allyTag = AllyTag.enemy;
 
 target = noone;
 combatSight = 120; // Distance to players they will start chasing

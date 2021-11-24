@@ -57,5 +57,3 @@ if (cleave.timer > 0) {
 if (cleave.timer <= 0) {
 	draw_weapon_end();
 }
-
-draw_text(x, y, kick.parry);

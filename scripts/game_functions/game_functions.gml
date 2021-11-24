@@ -89,3 +89,12 @@ function instance_nearest_notme(x1, y1, obj, _id, allyTag=noone) {
 
 	return nearest;
 }
+
+/**
+* Used as a function filler
+*
+* @function		blank()
+*/
+function blank() {
+	
+}
