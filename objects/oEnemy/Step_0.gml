@@ -83,5 +83,7 @@ switch (state) {
 	break;
 }
 
+telegraph = false;
+
 // Inherit the parent event
 event_inherited();

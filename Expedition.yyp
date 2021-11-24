@@ -39,6 +39,7 @@
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":0,},
     {"id":{"name":"fHealth","path":"fonts/fHealth/fHealth.yy",},"order":2,},
     {"id":{"name":"Entity","path":"scripts/Entity/Entity.yy",},"order":1,},
+    {"id":{"name":"sAttackWarning","path":"sprites/sAttackWarning/sAttackWarning.yy",},"order":3,},
     {"id":{"name":"Animation","path":"scripts/Animation/Animation.yy",},"order":1,},
     {"id":{"name":"sController","path":"sprites/sController/sController.yy",},"order":0,},
     {"id":{"name":"gamepad_functions","path":"scripts/gamepad_functions/gamepad_functions.yy",},"order":0,},

@@ -16,6 +16,8 @@ fireball = {
 poke = {
 	leadTime: 30,
 	leadTimer: 30,
+	leadDirectionTime: 15,
+	leadDirectionTimer: 15,
 	leadOffset: 4,
 	length: 16,
 	timer: 16,

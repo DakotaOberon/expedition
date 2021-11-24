@@ -16,8 +16,14 @@ switch (state) {
 			}
 
 			if (poke.attacking) {
+				isAttacking = true;
 				if (poke.leadTimer > 0) {
 					// Lead the attack
+					telegraph = true;
+					if (poke.leadDirectionTimer > 0) {
+						poke._direction = attackDirection
+						poke.leadDirectionTimer -= 1;
+					}
 					poke.leadTimer -= 1;
 				} else {
 					if (poke.timer > 0) {
@@ -41,9 +47,12 @@ switch (state) {
 						poke.attacking = false;
 						poke.timer = poke.length;
 						poke.leadTimer = poke.leadTime;
+						poke.leadDirectionTimer = poke.leadDirectionTime;
 						poke.distance = 0;
 					}
 				}
+			} else {
+				isAttacking = false;
 			}
 		}
 	break;

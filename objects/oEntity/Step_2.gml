@@ -36,13 +36,16 @@ if (tookDamage) {
 	dn.damage = damageTook;
 	dn.crit = false;
 
+	lastTookDamage = 0;
+	lastDamageTook = damageTook;
 	tookDamage = false;
 }
 
-// Reset combat values
-damageTook = 0;
+// Increment combat values
+lastTookDamage += 1;
 
 // Death
 if (_health <= 0) {
 	instance_destroy();
 }
+

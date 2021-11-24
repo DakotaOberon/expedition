@@ -30,3 +30,5 @@ target = noone;
 combatSight = 120; // Distance to players they will start chasing
 loseDistance = 240; // Distance from target before they stop chasing
 fleeHealth = irandom(_health / 4); // When to switch to flee state
+
+telegraph = false;

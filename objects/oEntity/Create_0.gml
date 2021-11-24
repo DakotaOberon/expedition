@@ -25,10 +25,13 @@ _maxHealth = 11;
 _health = _maxHealth;
 invincibleTimer = 0;
 tookDamage = false;
+lastTookDamage = 0;
+lastDamageTook = 0;
 damageTook = 0;
 allyTag = "passive";
 attackDirection = 0;
 inCombat = true;
+isAttacking = false;
 
 status = {
 	stun: {

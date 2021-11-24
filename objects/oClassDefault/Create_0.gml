@@ -46,7 +46,7 @@ kick = {
 	length: 5,
 	size: 4,
 	damage: 1,
-	ttl: 1,
+	ttl: 5,
 	detectRadius: 16,
 	stunDuration: 65,
 	knockbackDuration: 5,
@@ -58,8 +58,6 @@ kick = {
 	cooldownTimer: 0,
 	// Parry if used during enemy attack
 	parryDamage: 18,
-	parryLength: 8,
-	parryTimer: 0,
 	parry: false,
 	target: noone,
 	hitb: noone,

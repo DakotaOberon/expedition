@@ -11,7 +11,7 @@ function get_friction(_id=self) {
 	if (surf) {
 		f = surf._friction;
 	}
-	
+
 	return f;
 }
 
@@ -21,7 +21,7 @@ function get_friction(_id=self) {
 * @function		ai_update_movement(distance, [id])
 * @param		{real}		distance		Distance to target location
 * @param		{real}		[id]			Object to check. Default is object calling function
-* @return		{real}
+* @return		{object}
 */
 function ai_update_movement(distance, _id=self) {
 	var currSpd = point_distance(_id.x, _id.y, _id.x + _id._currentXSpeed, _id.y + _id._currentYSpeed);
@@ -41,17 +41,20 @@ function ai_update_movement(distance, _id=self) {
 		_id._xSpeedGoal = lengthdir_x(distance, _id._direction);
 		_id._ySpeedGoal = lengthdir_y(distance, _id._direction);
 	}
+
+	return _id;
 }
 
 /**
 * Check for collisions within bbox
 * 
-* @function		collision_on_me([xOffset], [yOffset])
+* @function		collision_on_me([xOffset], [yOffset], [walls])
 * @param		{real}		[xOffset]		x Offset to check at
 * @param		{real}		[yOffset]		y Offset to check at
+* @param		{boolean}	[walls]			Check for walls
 * @return		{Array}
 */
-function collision_on_me(xOffset=0, yOffset=0) {
+function collision_on_me(xOffset=0, yOffset=0, walls=false) {
 	var tmpDS = ds_list_create();
 	collision_rectangle_list(
 		self.bbox_left + xOffset,
@@ -65,17 +68,19 @@ function collision_on_me(xOffset=0, yOffset=0) {
 		false
 	);
 
-	collision_rectangle_list(
-		self.bbox_left + xOffset,
-		self.bbox_top + yOffset,
-		self.bbox_right + xOffset,
-		self.bbox_bottom + yOffset,
-		oWall,
-		false,
-		true,
-		tmpDS,
-		false
-	);
+	if (walls) {
+		collision_rectangle_list(
+			self.bbox_left + xOffset,
+			self.bbox_top + yOffset,
+			self.bbox_right + xOffset,
+			self.bbox_bottom + yOffset,
+			oWall,
+			false,
+			true,
+			tmpDS,
+			false
+		);
+	}
 
 	var returnArray = new Array();
 
@@ -86,6 +91,13 @@ function collision_on_me(xOffset=0, yOffset=0) {
 	return returnArray;
 }
 
+/**
+* Get exact distance to enemy bbox from self
+* 
+* @function		entity_distance(target)
+* @param		{target}	target			Object to check for
+* @return		{real}
+*/
 function entity_distance(target) {
 	var ptX1 = target.bbox_left;
 	var ptX2 = target.bbox_right;
@@ -98,4 +110,77 @@ function entity_distance(target) {
 	var d4 = point_distance(x, y, ptX2, ptY2);
 
 	return min(d1, d2, d3, d4);
+}
+
+enum WeaponLocation {
+	back
+}
+
+/**
+* Draw Weapon at beginning of draw step on Entity
+* 
+* @function		draw_weapon_start([location])
+* @param		{enum}		[location]		Location to draw weapon
+* @return
+*/
+function draw_weapon_start(location=WeaponLocation.back) {
+	var drawWeapon = false;
+	var weaponYOffset = 0;
+	var weaponXOffset = 0;
+	var xFlip = 1;
+	var weaponRotation = 0;
+	switch (location) {
+		case WeaponLocation.back:
+			// Draw weapon on back
+			weaponYOffset = -14;
+			weaponXOffset = 8;
+			weaponRotation = 180;
+			switch (currentAnim) {
+				case animSet.walkR:
+					xFlip = -1;
+				case animSet.walkL:
+				case animSet.walkD:
+					drawWeapon = true;
+				break;
+			}
+		break;
+	}
+
+	if (drawWeapon) {
+		draw_sprite_ext(weapon, 0, x + (weaponXOffset * xFlip), y + weaponYOffset, xFlip, 1, weaponRotation, c_white, 1);
+	}
+}
+
+/**
+* Draw Weapon at end of draw step on Entity
+* 
+* @function		draw_weapon_end([location])
+* @param		{enum}		[location]		Location to draw weapon
+* @return
+*/
+function draw_weapon_end(location=WeaponLocation.back) {
+	var drawWeapon = false;
+	var weaponYOffset = 0;
+	var weaponXOffset = 0;
+	var xFlip = 1;
+	var weaponRotation = 0;
+
+	switch (location) {
+		case WeaponLocation.back:
+			// Draw weapon on back
+			weaponYOffset = -14;
+			weaponXOffset = 8;
+			weaponRotation = 180;
+			switch (currentAnim) {
+				case animSet.walkU:
+					xFlip = -1;
+					drawWeapon = true;
+				break;
+			}
+		break;
+	}
+
+	if (drawWeapon) {
+		draw_sprite_ext(weapon, 0, x + (weaponXOffset * xFlip), y + weaponYOffset, xFlip, 1, weaponRotation, c_white, 1);
+	}
 }

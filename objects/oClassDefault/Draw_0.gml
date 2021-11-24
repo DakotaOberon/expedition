@@ -1,16 +1,6 @@
 // Draw weapon on back when looking down, right, or left
-var weaponYOffset = -14;
-var weaponXOffset = 8;
 if (cleave.timer <= 0) {
-	var flip = 1;
-	switch (currentAnim) {
-		case animSet.walkR:
-			flip = -1;
-		case animSet.walkL:
-		case animSet.walkD:
-			draw_sprite_ext(weapon, 0, x + (weaponXOffset * flip), y + weaponYOffset, flip, 1, 180, c_white, 1);
-		break;
-	}
+	draw_weapon_start();
 }
 
 // Draw Passive
@@ -65,7 +55,7 @@ if (cleave.timer > 0) {
 
 // Draw weapon on back when looking up
 if (cleave.timer <= 0) {
-	if (currentAnim == animSet.walkU) {
-		draw_sprite_ext(weapon, 0, x - weaponXOffset, y + weaponYOffset, -1, 1, 180, c_white, 1);
-	}
+	draw_weapon_end();
 }
+
+draw_text(x, y, kick.parry);

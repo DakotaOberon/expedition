@@ -85,6 +85,7 @@ if (controls.checkPress("cleave") && cleave.cooldownTimer <= 0) {
 }
 
 if (cleave.timer > 0) {
+	isAttacking = true;
 	if (instance_exists(cleave.hitb)) {
 		// Update cleave x and y
 		var xDir = x + lengthdir_x(cleave.distance, attackDirection) + cleave.xOffSet;
@@ -94,7 +95,6 @@ if (cleave.timer > 0) {
 	}
 	cleave.timer -= 1;
 	// Increment frame
-	// TODO: Don't use global here
 	cleave.animation.value[$ cleave.currentAnim].frameStep();
 } else if (cleave.cooldownTimer > 0) {
 	cleave.cooldownTimer -= 1;
@@ -114,11 +114,13 @@ if (controls.checkPress("kick") && kick.cooldownTimer <= 0) {
 			}
 	}
 
+	// Set timers
 	kick.timer = kick.length;
 	kick.cooldownTimer = kick.cooldown;
 }
 
 if (kick.timer > 0) {
+	isAttacking = true;
 	// Increment move frame by 2 to simulate kick
 	animations.value[$ currentAnim].frameStep(2);
 	if (!kick.target) {
@@ -134,7 +136,9 @@ if (kick.timer > 0) {
 				}
 			}
 		}
-	} else {
+	}
+
+	if (kick.target) {
 		// Turn player towards kick while active
 		var kickDir = point_direction(x, y, kick.target.x, kick.target.y + kick.yOffSet);
 		if (kickDir >= 0 && kickDir <= 45) || (kickDir >= 315 && kickDir <= 360) {
@@ -146,6 +150,10 @@ if (kick.timer > 0) {
 		} else {
 			currentAnim = animSet.walkD;
 		}
+
+		if (kick.target.isAttacking) {
+			kick.parry = true;
+		}
 	}
 	kick.timer -= 1;
 
@@ -155,7 +163,7 @@ if (kick.timer > 0) {
 			var dmg = kick.parry? kick.parryDamage : kick.damage;
 			var stun = new Status(StatusType.stun, kick.stunDuration);
 			var knockbackDirection = point_direction(x, y, kick.target.x, kick.target.y);
-			
+
 			var knockback = new Status(StatusType.knockback, kick.knockbackDuration, kick.knockbackStrength, knockbackDirection);
 			var statusArray = new Array([stun, knockback]);
 
