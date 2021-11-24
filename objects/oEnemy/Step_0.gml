@@ -1,6 +1,5 @@
 switch (state) {
 	case EnemyState.wander:
-		moveSpeed = 1;
 		inCombat = false;
 		if (wanderTimer <= 0) {
 			// Set destination variables

@@ -7,7 +7,7 @@ dash = {
 	_direction: 0,
 	_speed: 5,
 	length: 15,
-	cooldown: 15,
+	cooldown: 120,
 	cooldownTimer: 0,
 	drawX: 0,
 	drawY: 0
@@ -54,7 +54,7 @@ kick = {
 	dashKnockbackStrength: 3,
 	dashDirection: 0,
 	dealDash: false,
-	cooldown: 60,
+	cooldown: 90,
 	cooldownTimer: 0,
 	// Parry if used during enemy attack
 	parryDamage: 18,

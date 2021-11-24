@@ -34,3 +34,5 @@ fleeHealth = irandom(_health / 4); // When to switch to flee state
 telegraph = false;
 
 attackPassive = false;
+
+moveSpeed = 1.25;

@@ -15,3 +15,5 @@ updateDirection = PlayerUpdateDirection;
 camera = noone;
 
 allyTag = AllyTag.friendly;
+
+moveSpeed = 1.25;

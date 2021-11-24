@@ -12,7 +12,8 @@ if (controls.check("sprint")) {
 if (controls.checkPress("dash") && dash.cooldownTimer <= 0) {
 	// Set dash timer and direction
 	dash.timer = dash.length;
-	dash._direction = point_direction(x, y, mouse_x, mouse_y);
+	dash._direction = attackDirection;
+
 	// Set dash origin for drawing
 	dash.drawX = x;
 	dash.drawY = y;
